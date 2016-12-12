@@ -1,0 +1,3 @@
+protection : "test xor key"
+launcher_version : "Test version"
+clients_path : "clients"

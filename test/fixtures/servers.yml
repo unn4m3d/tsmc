@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  short_name: MyString
+  version: MyString
+  ip: 
+  port: 
+
+two:
+  name: MyString
+  short_name: MyString
+  version: MyString
+  ip: 
+  port: 

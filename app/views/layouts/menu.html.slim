@@ -12,4 +12,20 @@
             a.dropdown-item href=new_user_session_path Лаунчер
         li.nav-item
           a.nav-link href=home_about_path О проекте
+      ul.nav.navbar-nav.float-xs-right
+        - if user_signed_in?
+          li.nav-item
+            a.nav-link href="#"  
+              | Привет,
+              = current_user.username
+              | !
+          li.nav-item
+            a.nav-link href=destroy_user_session_path Выйти
+        - else
+          li.nav-item
+            a.nav-link href="#" Привет, Гость!
+          li.nav-item
+            a.nav-link href=new_user_session_path Войти
+          li.nav-item
+            a.nav-link href=new_user_registration_path Регистрация
   

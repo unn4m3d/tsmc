@@ -1,1 +1,11 @@
  @import "bootstrap";
+
+ .placeholder img {
+   border-radius : 50%;
+   border: 2px solid grey;
+
+ }
+
+ .text-center *, .img-fluid {
+   text-align: center;
+ }

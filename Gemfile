@@ -33,7 +33,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'cancancan'
 gem 'bootstrap'
-
+gem 'slim-rails'
+gem 'sprockets-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end

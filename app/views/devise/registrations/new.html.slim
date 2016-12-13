@@ -21,9 +21,10 @@ h2 Регистрация
         | characters minimum)
     br /
     == f.password_field :password, autocomplete: "off" 
-    
+
   .field
     == f.label :password_confirmation
+    br /
     == f.password_field :password_confirmation
   
   .actions

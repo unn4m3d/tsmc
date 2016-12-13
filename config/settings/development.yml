@@ -8,3 +8,4 @@ launcher_path:
 skins:
   default: default_skin.png
   directory: skins
+ignore_regex: "\\.(config|cfg|points|properties)$"

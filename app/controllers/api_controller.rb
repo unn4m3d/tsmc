@@ -133,7 +133,7 @@ class ApiController < ApplicationController
     end
 
     all = params[:all]
-    dir = Rails.root.join('assets').join(Settings.clients_path).join(client)
+    dir = Rails.root.join('app/assets').join(Settings.clients_path).join(client)
     unless dir.exist?
       @error = 'Wrong client short_name'
       @error_type = :client
@@ -144,10 +144,11 @@ class ApiController < ApplicationController
     @files = []
 
     Dir.chdir(dir.to_s) do
-      Dir.glob('**') do |elem|
-        ig = File.expand_path(elem.path).match(Regex.new(Settings.ignore_regex))
-        if !elem.directory? && (all || Settings.ignore_regex.empty? || !ig)
-          @files << file_info(dir.to_s, File.expand_path(elem))
+      Dir.glob('**/*') do |e|
+        regex = Settings.ignore_regex.to_s
+        ig = File.expand_path(e).match(Regexp.new(regex))
+        if !File.directory?(e) && (all || regex.empty? || !ig)
+          @files << file_info(dir.to_s, File.expand_path(e))
         end
       end
     end

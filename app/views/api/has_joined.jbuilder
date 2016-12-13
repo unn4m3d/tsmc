@@ -1,0 +1,9 @@
+json.id @uuid
+json.name @username
+json.properties [
+  {
+    name: "textures",
+    signature: "",
+    value: Base64.encode64(JSON.generate(@textures))
+  }
+]

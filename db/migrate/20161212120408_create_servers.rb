@@ -4,8 +4,8 @@ class CreateServers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :short_name
       t.string :version
-      t.stirng :ip
-      t.int :port
+      t.string :ip
+      t.integer :port
 
       t.timestamps
     end

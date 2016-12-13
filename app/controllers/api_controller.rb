@@ -3,22 +3,65 @@ class ApiController < ApplicationController
   include ApiHelper
 
   def server
-
+    # TODO
   end
 
   def launcher
-
+    # TODO
   end
 
   # Yggdrasil method
   def join
+    data = JSON.parse raw_post
+    render status: :no_content
+    # TODO
   end
 
   # Yggdrasil method
   def has_joined
+    username = params[:username]
+    server = params[:serverId]
+    # TODO
   end
 
   def auth
+    version = params[:version]
+    if Settings.launcher_version != version
+      @error = "Wrong launcher version"
+      @error_type = :launcher
+      render :error
+      return
+    end
+
+    user = User.where(username: params[:username])
+    if user.size == 0
+      @error = "Bad username"
+      @error_type = :login
+      render :error
+      return
+    end
+
+    if user.first.valid_password?(params[:password])
+      @username = params[:username]
+      @access_token = username_to_uuid @username
+      @session_id = gen_sid(@access_token)
+      begin
+        session = Session.find(user.first.id)
+        session.session = @session_id
+        session.uuid = @access_token
+        session.save!
+      rescue ActiveRecord::RecordNotFound
+        Session.create(
+          user_id: user.first.id,
+          session: @session_id,
+          uuid: @access_token
+        )
+      end
+    else
+      @error = "Bad password"
+      @error_type = :login
+      render :error
+    end
 
   end
 
@@ -26,6 +69,7 @@ class ApiController < ApplicationController
     client = params[:client]
     if !client
       @error = "No client specified"
+      @error_type = :client
       render :error
       return
     end
@@ -34,6 +78,7 @@ class ApiController < ApplicationController
     dir = Rails.root.join("assets").join(Settings.clients_path).join(client)
     unless dir.exist?
       @error = "Wrong client short_name"
+      @error_type = :client
       render :error
       return
     end
@@ -42,7 +87,7 @@ class ApiController < ApplicationController
 
     Dir.chdir(dir.to_s) do
       Dir.glob("**") do |elem|
-        if !elem.directory? && (all || Settings.ignore_regex.empty? || !File.expand_path(elem.path).match(Regex.new(Settings.ignore_regex))) 
+        if !elem.directory? && (all || Settings.ignore_regex.empty? || !File.expand_path(elem.path).match(Regex.new(Settings.ignore_regex)))
           @files << file_info(dir.to_s,File.expand_path(elem))
         end
       end

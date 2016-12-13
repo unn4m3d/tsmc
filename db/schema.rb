@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212103426) do
+ActiveRecord::Schema.define(version: 20161212120408) do
+
+  create_table "servers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.string   "version"
+    t.string   "ip"
+    t.integer  "port"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["short_name"], name: "index_servers_on_short_name", unique: true
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.integer  "user_id"

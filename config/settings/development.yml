@@ -1,3 +1,6 @@
 protection : "test xor key"
 launcher_version : "Test version"
 clients_path : "clients"
+launcher_path:
+  generic: "launcher.jar"
+  Windows: "launcher.exe"

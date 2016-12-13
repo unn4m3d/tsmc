@@ -1,6 +1,7 @@
 require 'digest'
 require 'minestat'
 
+# Useful API helpers
 module ApiHelper
   def file_info(root, path)
     {

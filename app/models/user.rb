@@ -27,4 +27,12 @@ class User < ApplicationRecord
       errors.add(:username, :invalid)
     end
   end
+
+  def skin_url
+    image_path("default_skin.png")
+  end
+
+  def cape_url
+    ""
+  end
 end

@@ -13,15 +13,43 @@ class ApiController < ApplicationController
   # Yggdrasil method
   def join
     data = JSON.parse raw_post
-    render status: :no_content
-    # TODO
+
+    uuid = data["selectedProfile"]
+    sid = data["accessToken"]
+    server = data["serverId"]
+
+    sessions = Session.where(uuid: uuid, session: sid)
+
+    if uuid.to_s.empty? || sid.to_s.empty? || server.to_s.empty? sessions.size < 1
+      render json: {error: "Bad login", errorMessage: "Bad login"}
+      return
+    else
+      session = sessions.first
+      session.server = server
+      session.save!
+      render json: {id: uuid, name: session.user.username}
+    end
   end
 
   # Yggdrasil method
   def has_joined
-    username = params[:username]
+    @username = params[:username]
     server = params[:serverId]
-    # TODO
+
+    sessions = Session.joins(:user).where(server: server, users:{ username: username})
+    if sessions.size < 1
+      render json:{error:"Bad server id or login", errorMessage: "Bad login"}
+      return
+    else
+      @uuid = sessions.first.uuid
+      @textures = {
+        timestamp: Time.now.to_i,
+        profileId: @uuid,
+        profileName: username,
+        isPublic: true,
+        # TODO textures
+      }
+    end
   end
 
   def auth
@@ -62,7 +90,6 @@ class ApiController < ApplicationController
       @error_type = :login
       render :error
     end
-
   end
 
   def files

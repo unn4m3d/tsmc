@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   get 'api/join'
-
+  post 'api/join'
   get 'api/has_joined'
-
+  post 'api/has_joined'
   get 'api/auth'
-
+  get 'api/servers'
+  get 'api/server'
+  get 'api/launcher'
   devise_for :users
   get 'home/index'
 

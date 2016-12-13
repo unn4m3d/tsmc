@@ -3,4 +3,8 @@ launcher_version : "Test version"
 clients_path : "clients"
 launcher_path:
   generic: "launcher.jar"
-  Windows: "launcher.exe"
+  win32: "launcher.exe"
+  win64: "launcher.exe"
+skins:
+  default: default_skin.png
+  directory: skins

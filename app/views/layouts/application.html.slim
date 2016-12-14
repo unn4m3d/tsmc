@@ -2,7 +2,7 @@ doctype html
 html
   head
     title The Sinner Minecraft Server
-    == csfr_meta_tags
+    == csrf_meta_tags
     == stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     == javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
@@ -11,3 +11,11 @@ html
       = notice
     .alert.text-xs-center
       = alert
+    
+    == yield
+    
+  footer
+    .container.text-xs-center 
+      | View it on 
+      a href="https://github.com/unn4m3d/tsmc" GitHub
+      

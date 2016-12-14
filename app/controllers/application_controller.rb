@@ -6,8 +6,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
-    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+    added_attrs = [:password, :remember_me]
+    sign_up_attrs = added_attrs + [:username,:email,:password_confirmation]
+    sign_in_attrs = added_attrs + [:username]
+    au_attrs = added_attrs + [:email,:password_confirmation]
+    devise_parameter_sanitizer.permit :sign_up, keys: sign_up_attrs
+    devise_parameter_sanitizer.permit :sign_in, keys: sign_in_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: au_attrs
+    puts [sign_in_attrs,sign_up_attrs,au_attrs].map(&:inspect)
   end
 end

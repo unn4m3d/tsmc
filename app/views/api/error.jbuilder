@@ -1,2 +1,2 @@
 json.error @error
-json.error_type @error_type
+json.errorType @error_type

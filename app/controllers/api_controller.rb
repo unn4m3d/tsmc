@@ -60,7 +60,7 @@ class ApiController < ApplicationController
       users: { username: username }
     )
     if sessions.empty?
-      render json:{ error: 'Bad server id or login', errorMessage: 'Bad login'}
+      render json: { error: 'Bad login', errorMessage: 'Bad login' }
       return
     else
       user = sessions.first.user

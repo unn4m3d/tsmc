@@ -1,3 +1,3 @@
 json.username @username
-json.access_token @access_token
-json.session_id @session_id
+json.accessToken @access_token
+json.sessionId @session_id

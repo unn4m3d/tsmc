@@ -2,8 +2,8 @@ class ApiController < ApplicationController
   include UuidHelper
   include ApiHelper
 
-  private def asset_path(*x)
-    ActionController::Base.helpers.asset_path(*x)
+  private def public_path(*x)
+    x.inject(Rails.root) { |a, e| a.join(e) }.path
   end
 
   def server
@@ -23,9 +23,9 @@ class ApiController < ApplicationController
   def launcher
     platform = params[:platform]
     if platform.nil? || Settings.launcher_path[platform.to_sym].nil?
-      render text: asset_path(Settings.launcher_path.generic)
+      render text: public_path(Settings.launcher_path.generic)
     else
-      render text: asset_path(Settings.launcher_path[platform.to_sym])
+      render text: public_path(Settings.launcher_path[platform.to_sym])
     end
   end
 
@@ -133,7 +133,7 @@ class ApiController < ApplicationController
     end
 
     all = params[:all]
-    dir = Rails.root.join('app/assets').join(Settings.clients_path).join(client)
+    dir = Rails.root.join('public').join(Settings.clients_path).join(client)
     unless dir.exist?
       @error = 'Wrong client short_name'
       @error_type = :client

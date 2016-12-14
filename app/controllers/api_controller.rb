@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   include ApiHelper
 
   private def public_path(*x)
-    x.inject(Rails.root) { |a, e| a.join(e) }.path
+    x.inject(Rails.root) { |a, e| a.join(e) }.to_s
   end
 
   def server
@@ -134,7 +134,7 @@ class ApiController < ApplicationController
 
     all = params[:all]
     @dir = public_path(Settings.clients_path, client)
-    unless @dir.exist?
+    unless File.exist? @dir
       @error = 'Wrong client short_name'
       @error_type = :client
       render :error

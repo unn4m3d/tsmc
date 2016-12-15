@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   include UuidHelper
   include ApiHelper
+  include XorHelper
 
   private def public_path(*x)
     x.inject(Rails.root) { |a, e| a.join(e) }.to_s
@@ -116,6 +117,8 @@ class ApiController < ApplicationController
           uuid: @access_token
         )
       end
+      @session_id = xor(@session_id,Settings.protection)
+      @access_token = xor(@access_token,Settings.protection)
     else
       @error = 'Bad password'
       @error_type = :login

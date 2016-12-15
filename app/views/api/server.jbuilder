@@ -1,4 +1,5 @@
 json.name @server.name
+json.shortName @server.short_name
 json.version @server.version
 json.ip @server.ip
 json.port @server.port

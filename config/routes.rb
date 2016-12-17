@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'api/server'
   get 'api/launcher'
   get 'api/files'
+  get 'api/assets'
   devise_for :users
   get 'home/index'
 

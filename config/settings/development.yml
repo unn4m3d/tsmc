@@ -8,4 +8,4 @@ launcher_path:
 skins:
   default: default_skin.png
   directory: skins
-ignore_regex: "\\.(?:(?!so|dylib|dll|jar|litemod).)$"
+ignore_regex: "\\.(json|config|points|world|cfg|txt)$"

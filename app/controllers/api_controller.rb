@@ -4,6 +4,7 @@ class ApiController < ApplicationController
   include XorHelper
 
   private def public_path(*x)
+    puts x.inspect
     x.inject(Rails.root) { |a, e| a.join(e) }.to_s
   end
 
@@ -145,16 +146,18 @@ class ApiController < ApplicationController
     end
 
     @files = []
+    @ignore = Settings.ignore_regex.to_s
 
     Dir.chdir(@dir.to_s) do
       Dir.glob('**/*') do |e|
-        regex = Settings.ignore_regex.to_s
+        regex = @ignore
         ig = File.expand_path(e).match(Regexp.new(regex))
         if !File.directory?(e) && (all || regex.empty? || !ig)
           @files << file_info(@dir.to_s, File.expand_path(e))
         end
       end
     end
+    @dir.gsub!(Rails.root.join('public').to_s, '')
   end
 
   def servers

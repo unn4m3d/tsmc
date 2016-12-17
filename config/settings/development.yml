@@ -1,6 +1,6 @@
 protection : "test xor key"
 launcher_version : "Test version"
-clients_path : "clients"
+clients_path : "public/clients"
 launcher_path:
   generic: "launcher.jar"
   win32: "launcher.exe"
@@ -8,4 +8,4 @@ launcher_path:
 skins:
   default: default_skin.png
   directory: skins
-ignore_regex: "\\.(config|cfg|points|properties)$"
+ignore_regex: "\\.(?:(?!so|dylib|dll|jar|litemod).)$"

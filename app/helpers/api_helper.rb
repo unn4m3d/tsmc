@@ -8,7 +8,7 @@ module ApiHelper
       name: path.sub(root, ''),
       size: File.size(path),
       sha256: Digest::SHA256.file(path).hexdigest,
-      sha512: Digest::SHA512.file(path).hexdigest
+      # sha512: Digest::SHA512.file(path).hexdigest
     }
   end
 

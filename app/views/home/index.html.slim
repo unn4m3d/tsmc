@@ -2,11 +2,31 @@
   .container
     .row
       .col-xs-4
+        p 
+          | Сервер The Sinner - 
+          a.ghlink href="https://github.com/unn4m3d/tsmc" первый open-source!
+      .col-xs-4.text-xs-center
         h1.tsselect The Sinner
         h3 Minecraft Servers
         h6 There's a lot of work to do
-      .col-xs-4
-        h3.text-muted # TODO News
+      
       .col-xs-4#tsmon
         h3.text-muted # TODO Servers monitoring 
         noscript Для мониторинга нужен включенный JavaScript
+
+.container
+  - for i in (0...(@posts.size/3.0).ceil)
+    .row
+      - for post in @posts[i*3...i*3+3]
+        .col-xs-4.post-preview
+          a href=post_path(post)
+            h3 
+              = post.title
+          
+          p 
+            == truncate post.text, length: 200, separator: ' ' do
+              == link_to "More", post_path(post)
+            
+          h6.text-muted
+            == post.user.username
+        

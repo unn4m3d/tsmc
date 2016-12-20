@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'posts/update/:id', to: 'posts#update', as: 'post_update'
   post 'posts/update/:id', to: 'posts#commit'
+  post 'posts/view/:id', to: 'posts#commit'
 
   get 'posts/delete'
 

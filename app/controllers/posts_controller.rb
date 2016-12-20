@@ -32,6 +32,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if can? :update, @post
       @post.text = params[:post][:text]
+      @post.title = params[:post][:title]
       @post.save!
       redirect_to post_path @post
     else

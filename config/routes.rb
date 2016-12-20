@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'posts/view/:id', to: 'posts#view', as: 'post'
 
-  get 'posts/update/:id', to: 'posts#update'
+  get 'posts/update/:id', to: 'posts#update', as: 'post_update'
   post 'posts/update/:id', to: 'posts#commit'
 
   get 'posts/delete'

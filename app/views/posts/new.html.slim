@@ -1,0 +1,16 @@
+.container
+  .row
+    h2 Добавить новость
+    == form_for :post, method: :post do |f|
+      .field
+        == f.label :title, "Заголовок"
+        br /
+        == f.text_field :title
+      
+      .field
+        == f.label :text, "Текст"
+        br/
+        == f.text_field :text
+      
+      == f.submit "Добавить"
+      

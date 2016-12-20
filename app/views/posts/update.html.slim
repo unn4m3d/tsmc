@@ -1,2 +1,13 @@
-h1 Posts#update
-p Find me in app/views/posts/update.html.slim
+.container
+  .row
+    h2 Обновить новость
+    == form_for @post, method: :post do |f|
+      == f.label :title, "Заголовок"
+      br /
+      == f.text_field :title
+      
+      == f.label :text, "Текст"
+      br/
+      == f.text_field :text
+      
+      == f.submit "Обновить"

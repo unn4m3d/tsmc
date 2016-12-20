@@ -1,2 +1,28 @@
-h1 Posts#view
-p Find me in app/views/posts/view.html.slim
+.container
+  .row
+    h1
+      == @post.title
+      
+    .col-xs-8
+      p 
+        = @post.text
+        
+      hr /
+      h6.text-muted
+        = @post.user.username
+        
+        | &nbsp;|&nbsp;
+        - if @post.created_at == @post.updated_at
+          = @post.created_at.to_s
+        - else
+          = @post.created_at.to_s
+          | ( обновлено
+          = @post.updated_at.to_s
+          | )
+      .tsbtns
+        - if can? :update, @post
+          a href=post_update_path(@post) Изменить
+          | &nbsp;
+        - if can? :delete, @post
+          a href=posts_delete_path(@post) Удалить
+          

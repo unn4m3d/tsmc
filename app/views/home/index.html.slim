@@ -15,18 +15,24 @@
         noscript Для мониторинга нужен включенный JavaScript
 
 .container
+  - if can? :create, Post
+    .row
+      p
+        a.btn.btn-primary href=posts_new_path Добавить новость
   - for i in (0...(@posts.size/3.0).ceil)
     .row
       - for post in @posts[i*3...i*3+3]
         .col-xs-4.post-preview
-          a href=post_path(post)
-            h3 
-              = post.title
-          
-          p 
-            == truncate post.text, length: 200, separator: ' ' do
-              == link_to "More", post_path(post)
-            
-          h6.text-muted
-            == post.user.username
+          .card
+            .card-block
+              .card-title
+                span.header
+                  = post.title
+                span.text-muted
+                 | &nbsp;by&nbsp;
+                 == post.user.username
+              p.card-text
+                == truncate post.text, length: 200, separator: ' ' do
+                  == link_to "More", post_path(post)
+              a.btn.btn-primary href=post_path(post) Прочитать
         

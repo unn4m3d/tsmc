@@ -34,4 +34,12 @@ class User < ApplicationRecord
   end
 
   has_many :posts
+
+  def roles
+    @roles ||= role.to_s.split(';')
+  end
+
+  def is?(role)
+    roles.include? role.to_s
+  end
 end

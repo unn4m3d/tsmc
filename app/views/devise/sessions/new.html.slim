@@ -1,22 +1,24 @@
-h2 Вход
+.jumbotron
+  .container.text-xs-center
+    h2 Вход
 
-== form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    == f.label :username
-    br /
-    == f.text_field :username, autofocus: true
+    == form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .field
+        == f.label :username
+        br /
+        == f.text_field :username, autofocus: true
     
-  .field
-    == f.label :password
-    br /
-    == f.password_field :password, autocomplete: "off"
+      .field
+        == f.label :password
+        br /
+        == f.password_field :password, autocomplete: "off"
     
-  - if devise_mapping.rememberable?
-    .field
-      == f.check_box :remember_me
-      == f.label :remember_me
+      - if devise_mapping.rememberable?
+        .field
+          == f.check_box :remember_me
+          == f.label :remember_me
       
-  .actions
-    == f.submit "Войти"
+      .actions
+      == f.submit "Войти"
     
-== render "devise/shared/links"
+    == render "devise/shared/links"

@@ -1,3 +1,4 @@
+# API Controller
 class ApiController < ApplicationController
   include UuidHelper
   include ApiHelper

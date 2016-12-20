@@ -13,6 +13,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: sign_up_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: sign_in_attrs
     devise_parameter_sanitizer.permit :account_update, keys: au_attrs
-    puts [sign_in_attrs,sign_up_attrs,au_attrs].map(&:inspect)
   end
 end

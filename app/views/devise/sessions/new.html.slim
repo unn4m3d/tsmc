@@ -19,6 +19,7 @@
           == f.label :remember_me
       
       .actions
-      == f.submit "Войти"
-    
-    == render "devise/shared/links"
+      p
+        == f.submit "Войти", class:'btn btn-primary'
+    p  
+      == render "devise/shared/links"

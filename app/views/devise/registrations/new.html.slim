@@ -30,6 +30,6 @@
         == f.password_field :password_confirmation
   
       .actions
-        == f.submit "Регистрация"
-    
-    == render "devise/shared/links"
+        == f.submit "Регистрация", class: 'btn btn-primary'
+    p
+      == render "devise/shared/links"

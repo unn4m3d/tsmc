@@ -10,7 +10,7 @@
       .field
         == f.label :text, "Текст"
         br/
-        == f.text_field :text
+        == f.text_area :text, size: "50x10"
       
-      == f.submit "Добавить"
+      == f.submit "Добавить", class: 'btn btn-primary'
       

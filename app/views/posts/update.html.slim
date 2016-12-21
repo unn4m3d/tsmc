@@ -2,12 +2,13 @@
   .row
     h2 Обновить новость
     == form_for @post, method: :post do |f|
-      == f.label :title, "Заголовок"
-      br /
-      == f.text_field :title
-      
-      == f.label :text, "Текст"
-      br/
-      == f.text_field :text
-      
-      == f.submit "Обновить"
+      .field
+        == f.label :title, "Заголовок"
+        br /
+        == f.text_field :title
+      .field
+        == f.label :text, "Текст"
+        br/
+        == f.text_area :text, size: "50x10"
+      .actions
+        == f.submit "Обновить",class: 'btn btn-primary'

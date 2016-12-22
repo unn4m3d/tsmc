@@ -1,3 +1,6 @@
+# rubocop:disable ClassLength
+# rubocop:disable MethodLength
+# rubocop:disable AbcSize
 # API Controller
 class ApiController < ApplicationController
   include UuidHelper
@@ -53,6 +56,7 @@ class ApiController < ApplicationController
     end
   end
 
+  # rubocop:disable PredicateName
   # Yggdrasil method
   def has_joined
     @username = params[:username]
@@ -85,10 +89,22 @@ class ApiController < ApplicationController
       end
     end
   end
+  # rubocop:enable PredicateName
 
   def auth
     version = params[:version]
-    if Settings.launcher_version != version
+    begin
+      @session = Session.find(params[:sid].to_i)
+    rescue ActiveRecord::RecordNotFound
+      @error = 'Wrong SID'
+      @error_type = :session
+      render :error
+      return
+    end
+    lv = Settings.launcher_version
+    dv = decrypt(version, @session.key).split('$').first
+    if dv != lv
+      puts dv, lv
       @error = 'Wrong launcher version'
       @error_type = :launcher
       render :error
@@ -103,31 +119,32 @@ class ApiController < ApplicationController
       return
     end
 
-    if user.first.valid_password?(params[:password])
+    pass = decrypt params[:password], @session.key
+    if user.first.valid_password?(pass)
       @username = params[:username]
       @access_token = username_to_uuid @username
       @session_id = gen_sid(@access_token)
-      begin
-        session = Session.find(user.first.id)
-        session.session = @session_id
-        session.uuid = @access_token
-        session.save!
-      rescue ActiveRecord::RecordNotFound
-        Session.create(
-          user_id: user.first.id,
-          session: @session_id,
-          uuid: @access_token
-        )
-      end
-      @session_id = xor(@session_id,Settings.protection)
-      @access_token = xor(@access_token,Settings.protection)
+
+      Session.where(user_id: user.first.id).delete_all
+
+      @session.user = user.first
+      @session.session = @session_id
+      @session.uuid = @access_token
+      @session.save!
+
+      @session_id = xor(@session_id, Settings.protection)
+      @access_token = xor(@access_token, Settings.protection)
+
     else
+      puts params[:password]
+      puts pass
       @error = 'Bad password'
       @error_type = :login
       render :error
     end
   end
 
+  # rubocop:disable CyclomaticComplexity
   def files
     client = params[:client]
     unless client
@@ -159,6 +176,12 @@ class ApiController < ApplicationController
       end
     end
     @dir.gsub!(Rails.root.join('public').to_s, '')
+  end
+  # rubocop:enable CyclomaticComplexity
+
+  def get_session
+    session = Session.create(key: Random.rand(0xFFFFFFFF).to_s)
+    render json: { id: session.id, key: session.key }
   end
 
   def assets

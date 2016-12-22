@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218064633) do
+ActiveRecord::Schema.define(version: 20161222084500) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20161218064633) do
     t.string   "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "key"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 

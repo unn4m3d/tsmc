@@ -1,3 +1,4 @@
+# Posts controller
 class PostsController < ApplicationController
   def index
   end
@@ -6,13 +7,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    #authorize! :create, Post
-    if user_signed_in? and can? :create, Post
-      post = Post.create title: params[:post][:title], text:params[:post][:text], user:current_user
+    if can? :create, Post
+      post = Post.create(
+        title: params[:post][:title],
+        text: params[:post][:text],
+        user: current_user
+      )
       redirect_to post_path post
     else
-      errors.add(:user,'You are not permitted to do this')
-      #redirect_to root_path
+      errors.add(:user, 'You are not permitted to do this')
     end
   end
 
@@ -23,11 +26,12 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     unless can? :update, @post
-      errors.add(:user,'You are not permitted to do this')
+      errors.add(:user, 'You are not permitted to do this')
       redirect_to root_path
     end
   end
 
+  # rubocop:disable AbcSize
   def commit
     @post = Post.find(params[:id])
     if can? :update, @post
@@ -36,9 +40,10 @@ class PostsController < ApplicationController
       @post.save!
       redirect_to post_path @post
     else
-      errors.add(:post,'You are not permitted to do this')
+      errors.add(:post, 'You are not permitted to do this')
     end
   end
+  # rubocop:enable AbcSize
 
   def delete
     @post = Post.find(params[:id])
@@ -46,7 +51,7 @@ class PostsController < ApplicationController
       @post.delete!
       redirect_to root_path
     else
-      errors.add(:post,'You are not permitted to do this')
+      errors.add(:post, 'You are not permitted to do this')
     end
   end
 end

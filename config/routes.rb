@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   get 'home/about'
 
   get 'home/launcher'
+
+  get 'home/pretty_skin/:id', to: 'home#pretty_skin', as: 'pretty_skin'
+  get 'home/pretty_cape/:id', to: 'home#pretty_cape', as: 'pretty_cape'
+  get 'home/minecraft_settings'
+  post 'home/update_skin', as: 'update_skin'
+  post 'home/update_cape', as: 'update_cape'
+
   root to: 'home#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

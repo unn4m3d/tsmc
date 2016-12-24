@@ -17,6 +17,21 @@ class User < ApplicationRecord
     case_sensitive: false
   }
 
+  has_attached_file :skin
+  has_attached_file :cape
+  validates_attachment(
+    :skin,
+    content_type: { content_type: 'image/png' },
+    dimensions: Settings.skin_dimensions,
+    size: { less_than: 250.kilobytes }
+  )
+  validates_attachment(
+    :cape,
+    content_type: { content_type: 'image/png' },
+    dimensions: Settings.cape_dimensions,
+    size: { less_than: 250.kilobytes }
+  )
+
   def validate_username
     if username_changed? && persisted?
       errors.add(:username, 'Cannot change username')
@@ -26,11 +41,19 @@ class User < ApplicationRecord
   end
 
   def skin_url
-    Rails.root.join('public').join('default_skin.png')
+    if skin
+      skin.url
+    else
+      Rails.root.join('public').join('default_skin.png')
+    end
   end
 
   def cape_url
-    ''
+    if cape
+      cape.url
+    else
+      ''
+    end
   end
 
   has_many :posts

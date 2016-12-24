@@ -9,3 +9,14 @@ skins:
   default: default_skin.png
   directory: skins
 ignore_regex: "\\.(json|config|points|world|cfg|txt)$"
+skin_dimensions:
+  - width : 64
+    height: 32
+  - width : 64
+    heigth: 64
+
+cape_dimensions:
+  - width : 64
+    height: 32
+  - width : 22
+    height: 17

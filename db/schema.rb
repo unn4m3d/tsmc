@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222084500) do
+ActiveRecord::Schema.define(version: 20161224082336) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(version: 20161222084500) do
     t.datetime "updated_at",                          null: false
     t.string   "username"
     t.string   "role"
+    t.string   "cape_file_name"
+    t.string   "cape_content_type"
+    t.integer  "cape_file_size"
+    t.datetime "cape_updated_at"
+    t.string   "skin_file_name"
+    t.string   "skin_content_type"
+    t.integer  "skin_file_size"
+    t.datetime "skin_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

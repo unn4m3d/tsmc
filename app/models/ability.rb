@@ -5,5 +5,6 @@ class Ability
     user ||= User.new
     can :manage, :all if user.is? :admin
     can :comment, Post
+    can :manage, self
   end
 end

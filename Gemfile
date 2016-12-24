@@ -38,6 +38,7 @@ gem 'sprockets-rails'
 gem 'tether-rails'
 gem 'config'
 gem 'minestat'
+gem 'mineskin'
 gem 'paperclip'
 
 group :development, :test do

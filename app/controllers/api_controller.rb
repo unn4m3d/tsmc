@@ -209,4 +209,9 @@ class ApiController < ApplicationController
   def servers
     @servers = Server.all
   end
+
+  def news
+    @posts = Post.last(5)
+    render :news, layout: false
+  end
 end

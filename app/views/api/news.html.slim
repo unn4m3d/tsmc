@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    == stylesheet_link_tag "embedded_news", media: "all"
+    title News
+  
+  body
+    h1 Новости
+    .posts
+      - for post in @posts
+        .post
+          h2 
+            == post.title
+          
+          p 
+            == post.text

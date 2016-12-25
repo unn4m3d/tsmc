@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'api/files'
   get 'api/assets'
   get 'api/session', to: 'api#get_session'
+  get 'api/news'
   devise_for :users
   get 'home/index'
 

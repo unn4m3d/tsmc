@@ -59,3 +59,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 
 gem 'aescrypt'
+gem 'whenever', require: false
+gem 'chart-js-rails'

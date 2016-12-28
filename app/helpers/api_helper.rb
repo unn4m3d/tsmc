@@ -42,4 +42,32 @@ module ApiHelper
     res << cipher.final
     res
   end
+
+  def pretty_time(last, current)
+    if last.to_date == current.to_date
+      current.strftime('%l:%M %p')
+    else
+      current.strftime('%d %b %l:%M %p')
+    end
+  end
+
+  def pretty_stats(stats)
+    current_time = stats.first.time
+
+    labels = []
+
+    output = {}
+    stats.each do |s|
+      output[pretty_time(current_time,s.time)] ||= {}
+      output[pretty_time(current_time,s.time)][s.server.name] = s
+      labels << s.server.name unless labels.include? s.server.name
+      current_time = s.time unless s.time == current_time
+    end
+    return output,labels
+  end
+
+  COLORS = [
+    { bg: 'rgba(197, 9, 9, 0.2)', border: 'rgba(197, 9, 9, 1)' },
+    { bg: 'rgba(7, 112, 160, 0.2)', border: 'rgba(7, 112, 160, 1)' }
+  ].freeze
 end

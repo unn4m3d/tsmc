@@ -214,4 +214,21 @@ class ApiController < ApplicationController
     @posts = Post.last(5)
     render :news, layout: false
   end
+
+  def graph
+    stats = params[:servers] ?
+      ServerStat.where(server_id: params[:servers]) :
+      ServerStat.all
+
+    pstats, slabels = pretty_stats stats.select{|x| x.time >= 24.hours.ago}
+    @labels = pstats.keys
+    @datasets = slabels.map do |label|
+      {
+        label: label,
+        data: @labels.map { |time| pstats[time][label].players || 0 },
+        backgroundColor: COLORS[Digest::MD5.hexdigest(label)[-2..-1].to_i(16) % COLORS.size][:bg],
+        borderColor: COLORS[Digest::MD5.hexdigest(label)[-2..-1].to_i(16) % COLORS.size][:border]
+      }
+    end
+  end
 end

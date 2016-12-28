@@ -10,9 +10,19 @@
         h1.tsselect The Sinner
         h3 Minecraft Servers
       
-      .col-xs-4#tsmon
-        h3.text-muted # TODO Servers monitoring 
-        noscript Для мониторинга нужен включенный JavaScript
+      .col-xs-4
+        ul.nav.nav-tabs role='tablist'
+          li.nav-item
+            a.nav-link.active role='tab' data-toggle='tab' href='#tsmon' Мониторинг
+          li.nav-item
+            a.nav-link role='tab' data-toggle='tab' href='#tssg' График загрузки
+        
+        .tab-content
+          .tab-pane.active#tsmon role='tabpanel'
+            h3.text-muted # TODO Servers monitoring 
+            noscript Для мониторинга нужен включенный JavaScript
+          .tab-pane#tssg role='tabpanel'
+            canvas#tsgraph width=320 height=200
 
 .container
   - if can? :create, Post

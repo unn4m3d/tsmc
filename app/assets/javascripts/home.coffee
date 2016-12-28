@@ -7,7 +7,7 @@ api_create_progress = (elem,sdata) ->
   id = "server-#{sdata.name}"
   if sdata.online
     elem.append $("<div class='text-xs-center' id='#{id}'></div>").text("#{sdata.name} #{sdata.players}/#{sdata.max}")
-    elem.append $("<progress class='progress' value='#{sdata.players}' max='#{sdata.max}' aria-describedby='#{id}' />")
+    elem.append $("<progress class='progress' value='#{sdata.players.replace(/[^0-9]/g,'')}' max='#{sdata.max.replace(/[^0-9]/g,'')}' aria-describedby='#{id}' />")
   else
     elem.append $("<div class='text-xs-center' id='#{id}'></div>").text("#{sdata.name} offline")
     elem.append $("<progress class='progress server-full' value='1' max='1' aria-describedby='#{id}' />")
@@ -35,7 +35,7 @@ window.onload = () ->
   console.log "Loading"
   mondiv = $("#tsmon")
   if mondiv.length
-    console.log("Enabled")
+    console.log("Monitoring enabled")
     $.ajax
       url: "/api/servers"
       dataType: "json"
@@ -47,10 +47,26 @@ window.onload = () ->
         if json.servers? && json.servers.length > 0
           for serv in json.servers
             console.log serv
-            api_write_info mondiv, serv.short_name
+            api_write_info mondiv, serv.shortName
         else
           mondiv.append($("<div class='text-muted'></div>").text("Не найдены сервера"))
       error: (json) ->
         console.log json
   else
-    console.log("Disabled")
+    console.log("Monitoring disabled")
+
+  graph = $("#tsgraph")
+  if graph.length
+    console.log("Graph enabled")
+    $.ajax
+      url: "/api/graph"
+      dataType: "json"
+      success: (json) ->
+        console.log json
+        new Chart graph,
+          type: 'line'
+          data: json
+      error: (json) ->
+        console.error json
+  else
+    console.log("Graph disabled")

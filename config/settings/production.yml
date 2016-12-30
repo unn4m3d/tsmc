@@ -8,7 +8,7 @@ launcher_path:
 skins:
   default: default_skin.png
   directory: skins
-ignore_regex: "\\.(json|config|points|world|cfg|txt)$"
+ignore_regex: ".*\\.(json|config|points|world|cfg|txt)$"
 skin_dimensions:
   - width : 64
     height: 32

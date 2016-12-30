@@ -22,7 +22,7 @@ module ApiHelper
   end
 
   def sha256(str)
-    Digest::SHA256.digest str
+    Digest::SHA256.digest str.to_s
   end
 
   def encrypt(s, k)
@@ -58,16 +58,42 @@ module ApiHelper
 
     output = {}
     stats.each do |s|
-      output[pretty_time(current_time,s.time)] ||= {}
-      output[pretty_time(current_time,s.time)][s.server.name] = s
+      output[pretty_time(current_time, s.time)] ||= {}
+      output[pretty_time(current_time, s.time)][s.server.name] = s
       labels << s.server.name unless labels.include? s.server.name
       current_time = s.time unless s.time == current_time
     end
-    return output,labels
+    return output, labels
   end
 
   COLORS = [
     { bg: 'rgba(197, 9, 9, 0.2)', border: 'rgba(197, 9, 9, 1)' },
     { bg: 'rgba(7, 112, 160, 0.2)', border: 'rgba(7, 112, 160, 1)' }
   ].freeze
+
+  def default_skin_url
+    Rails
+      .root
+      .join('public')
+      .join(Settings.skins.directory)
+      .join(Settings.skins.default).to_s
+  end
+
+  def gen_texdata(uuid, username, user)
+    tex = {
+      timestamp: Time.now.to_i,
+      profileId: @uuid,
+      profileName: username,
+      isPublic: true,
+      textures: {
+        SKIN: {
+          url: user.skin.nil? ? default_skin_url : user.skin.url
+        }
+      }
+    }
+
+    tex[:textures][:CAPE] = { url: user.cape_url.to_s } unless user.cape.nil?
+
+    tex
+  end
 end

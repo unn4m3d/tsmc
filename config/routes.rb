@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'api/join'
   get 'api/has_joined'
   post 'api/has_joined'
+  get 'api/profile/:user/', to: 'api#profile'
+  post 'api/profile/:user/', to: 'api#profile'
 
   # API
   get 'api/auth'

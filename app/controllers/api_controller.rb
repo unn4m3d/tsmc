@@ -7,6 +7,8 @@ class ApiController < ApplicationController
   include ApiHelper
   include XorHelper
 
+  skip_before_action :verify_authenticity_token
+
   private def public_path(*x)
     puts x.inspect
     x.inject(Rails.root) { |a, e| a.join(e) }.to_s
@@ -37,7 +39,7 @@ class ApiController < ApplicationController
 
   # Yggdrasil method
   def join
-    data = JSON.parse raw_post
+    data = JSON.parse request.raw_post
 
     uuid = data['selectedProfile']
     sid = data['accessToken']
@@ -50,7 +52,7 @@ class ApiController < ApplicationController
       return
     else
       session = sessions.first
-      session.server = server
+      session.serverid = server
       session.save!
       render json: { id: uuid, name: session.user.username }
     end
@@ -63,8 +65,8 @@ class ApiController < ApplicationController
     server = params[:serverId]
 
     sessions = Session.joins(:user).where(
-      server: server,
-      users: { username: username }
+      serverid: server,
+      users: { username: @username }
     )
     if sessions.empty?
       render json: { error: 'Bad login', errorMessage: 'Bad login' }
@@ -72,21 +74,7 @@ class ApiController < ApplicationController
     else
       user = sessions.first.user
       @uuid = sessions.first.uuid
-      @textures = {
-        timestamp: Time.now.to_i,
-        profileId: @uuid,
-        profileName: username,
-        isPublic: true,
-        textures: {
-          SKIN: {
-            url: user.skin_url || asset_path(Settings.skins.default)
-          }
-        }
-      }
-
-      unless user.cape_url.to_s.empty?
-        @textures[:textures][:CAPE] = { url: user.cape_url.to_s }
-      end
+      @textures = gen_texdata(@uuid, user.username, user)
     end
   end
   # rubocop:enable PredicateName
@@ -129,11 +117,12 @@ class ApiController < ApplicationController
 
       @session.user = user.first
       @session.session = @session_id
-      @session.uuid = @access_token
+      @session.uuid = @access_token.delete('-')
       @session.save!
 
-      @session_id = xor(@session_id, Settings.protection)
-      @access_token = xor(@access_token, Settings.protection)
+      puts "UUID : #{@access_token}"
+
+      @session_id = @session_id
 
     else
       puts params[:password]
@@ -216,11 +205,12 @@ class ApiController < ApplicationController
   end
 
   def graph
-    stats = params[:servers] ?
-      ServerStat.where(server_id: params[:servers]) :
-      ServerStat.all
-
-    pstats, slabels = pretty_stats stats.select{|x| x.time >= 24.hours.ago}
+    @stats = if params[:servers]
+               ServerStat.where(server_id: params[:servers])
+             else
+               ServerStat.all
+             end
+    pstats, slabels = pretty_stats @stats.select { |x| x.time >= 24.hours.ago }
     @labels = pstats.keys
     @datasets = slabels.map do |label|
       {
@@ -230,5 +220,17 @@ class ApiController < ApplicationController
         borderColor: COLORS[Digest::MD5.hexdigest(label)[-2..-1].to_i(16) % COLORS.size][:border]
       }
     end
+  end
+
+  # Yggdrasil method
+  def profile
+    @uuid = params[:uuid]
+    sessions = Session.where(uuid: @uuid)
+    if sessions.empty?
+      render status: :no_content
+      return
+    end
+    @username = sessions.first.user.username
+    @textures = gen_texdata @uuid, @username, sessions.first.user
   end
 end

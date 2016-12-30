@@ -21,6 +21,7 @@ module UuidHelper
     cs_hi |= (1 << 7)
 
     if [1].pack('I') != [1].pack('N')
+      puts 'Changing order'
       t_lo = change_order t_lo
       t_mi = change_order t_mi
       t_hi = change_order t_hi
@@ -28,7 +29,7 @@ module UuidHelper
 
     sprintf(
       '%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
-      t_lo, t_mi, t_hi, cs_hi, cs_lo, *(raw_d[5..-1])
+      (t_lo.to_i & 0xFFFFFFFF), t_mi, t_hi, cs_hi, cs_lo, *(raw_d[5..-1])
     )
   end
 end

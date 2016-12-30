@@ -37,7 +37,7 @@ gem 'slim-rails'
 gem 'sprockets-rails'
 gem 'tether-rails'
 gem 'config'
-gem 'minestat'
+gem 'minestat', git: 'https://github.com/unn4m3d/minestat'
 gem 'mineskin'
 gem 'paperclip'
 
@@ -61,3 +61,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 gem 'aescrypt'
 gem 'whenever', require: false
 gem 'chart-js-rails'
+gem 'mysql2'

@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/unn4m3d/minestat
+  revision: 2f9ffe6cafc185a4d39479b5b67be9bef3ebd37e
+  specs:
+    minestat (0.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -103,10 +109,10 @@ GEM
     mimemagic (0.3.2)
     mineskin (0.0.2)
       rmagick
-    minestat (0.1.1)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    mysql2 (0.4.5)
     nio4r (1.2.1)
     nokogiri (1.7.0)
       mini_portile2 (~> 2.1.0)
@@ -224,7 +230,8 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   mineskin
-  minestat
+  minestat!
+  mysql2
   paperclip
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)

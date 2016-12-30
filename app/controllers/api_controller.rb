@@ -176,24 +176,14 @@ class ApiController < ApplicationController
   # rubocop:enable AccessorMethodName
 
   def assets
-    @dir = public_path(Settings.clients_path, 'assets')
-    puts @dir
-    unless File.exist? @dir
-      @error = 'Assets do not exist'
-      @error_type = :client
+    @path = public_path(Settings.clients_path, 'assets.zip')
+    unless File.exist?(@path)
+      @error = "Assets do not exist"
+      @error_type = :assets
       render :error
-      return
     end
-
-    @files = []
-
-    Dir.chdir(@dir.to_s) do
-      Dir.glob('**/*') do |e|
-        @files << ('/' + e) unless File.directory?(e)
-      end
-    end
-    @dir.gsub!(Rails.root.join('public').to_s, '')
-  end
+    @path = "clients/assets.zip" # FIXME
+end
 
   def servers
     @servers = Server.all

@@ -1,2 +1,1 @@
-json.files @files
-json.dir @dir
+json.path @path

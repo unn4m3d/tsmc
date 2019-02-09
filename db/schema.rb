@@ -71,11 +71,11 @@ ActiveRecord::Schema.define(version: 20161228012847) do
     t.string   "role"
     t.string   "cape_file_name"
     t.string   "cape_content_type"
-    t.integer  "cape_file_size"
+    t.bigint   "cape_file_size"
     t.datetime "cape_updated_at"
     t.string   "skin_file_name"
     t.string   "skin_content_type"
-    t.integer  "skin_file_size"
+    t.bigint   "skin_file_size"
     t.datetime "skin_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -14,7 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -37,7 +37,7 @@ gem 'slim-rails'
 gem 'sprockets-rails'
 gem 'tether-rails'
 gem 'config'
-gem 'minestat', git: 'https://github.com/unn4m3d/minestat'
+gem 'minestat'#, git: 'https://github.com/unn4m3d/minestat'
 gem 'mineskin'
 gem 'paperclip'
 
@@ -53,6 +53,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "sqlite3", '~> 1.3.6'
+end
+
+group :production do
+  gem "mysql2"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -61,4 +66,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 gem 'aescrypt'
 gem 'whenever', require: false
 gem 'chart-js-rails'
-gem 'mysql2'
+#gem 'mysql2'

@@ -1,35 +1,24 @@
-.container
+.container-fluid.bg-dark
   .row
-    .text-center
+    .col-12.text-center
       h1 Скачать лаунчер
-      h6.text-muted KLauncher
-      p 
-        h4
-          | Исходный код доступен 
-          a.ghlink href="https://github.com/unn4m3d/klauncher" на GitHub
-  .row
-    .col-xs-6.text-xs-center
-      .card
+  .row.justify-content-center
+    .col-4.text-center
+      .card.bg-dark.border-light
         img.card-img-top src=image_path("klauncher_win.jpg") alt="Windows"
         .card-block
           h4.card-title Сборка под Windows
-          p.card-text 
+          p.card-text
             strong EXE
-          .text-xs-center
+          .text-center
             a.btn.btn-primary href=("/" + Settings.launcher_path.win32) Скачать
-            
-    .col-xs-6.text-xs-center
-      .card
+
+    .col-4.text-center
+      .card.bg-dark.border-light
         img.card-img-top src=image_path("klauncher_generic.jpg") alt="Cross-platform"
           .card-block
             h4.card-title Кроссплатформенная сборка
-            p.card-text 
+            p.card-text
               strong JAR
-            .text-xs-center
+            .text-center
               a.btn.btn-primary href=("/" + Settings.launcher_path.generic) Скачать
-    
-            
-            
-            
-            
-      

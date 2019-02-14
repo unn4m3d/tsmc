@@ -170,7 +170,7 @@ class ApiController < ApplicationController
 
   # rubocop:disable AccessorMethodName
   def get_session
-    session = Session.create(key: Random.rand(0xFFFFFFFF).to_s)
+    session = Session.create!(key: Random.rand(0xFFFFFFFF).to_s)
     render json: { id: session.id, key: session.key }
   end
   # rubocop:enable AccessorMethodName

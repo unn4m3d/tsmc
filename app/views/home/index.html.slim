@@ -1,30 +1,35 @@
-.jumbotron
-  .container
+.jumbotron.bg-dark
+  .container-fluid
     .row
-      .col-xs-4
-        p 
-          | Сервер The Sinner - 
-          a.ghlink href="https://github.com/unn4m3d/tsmc" первый open-source!
-      .col-xs-4.text-xs-center
+      .col-4
+        p.text-center Добро пожаловать в Воронеж!
+        p.text-center
+          | Как начать играть? Ответ прост:
+          ol.text-center
+            li
+              a href=new_user_registration_path Зарегистрироваться
+            li
+              a href=home_launcher_path Скачать и запустить лаунчер
+      .col-4.text-center
         img.logo-main width=110 height=110 src=image_path("logo.png")
-        h1.tsselect The Sinner
-        h3 Minecraft Servers
-      
-      .col-xs-4
+        h1.tsselect Воронеж
+        h3 майнкрафт по-русски
+
+      .col-4.text-center
         ul.nav.nav-tabs role='tablist'
           li.nav-item
             a.nav-link.active role='tab' data-toggle='tab' href='#tsmon' Мониторинг
           li.nav-item
             a.nav-link role='tab' data-toggle='tab' href='#tssg' График загрузки
-        
+
         .tab-content
           .tab-pane.active#tsmon role='tabpanel'
-            h3.text-muted # TODO Servers monitoring 
+            h3.text-muted # TODO Servers monitoring
             noscript Для мониторинга нужен включенный JavaScript
           .tab-pane#tssg role='tabpanel'
             canvas#tsgraph width=320 height=200
 
-.container
+.container.bg-dark
   - if can? :create, Post
     .row
       p
@@ -32,7 +37,7 @@
   - for i in (0...(@posts.size/3.0).ceil)
     .row
       - for post in @posts[i*3...i*3+3]
-        .col-xs-4.post-preview
+        .col-4
           .card
             .card-block
               .card-title
@@ -45,4 +50,3 @@
                 == truncate post.text, length: 200, separator: ' ' do
                   == link_to "More", post_path(post)
               a.btn.btn-primary href=post_path(post) Прочитать
-        

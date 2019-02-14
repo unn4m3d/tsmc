@@ -1,85 +1,29 @@
-.jumbotron
+.jumbotron.bg-dark
   .container
     .text-center
-      h1 Сервер Minecraft The Sinner
-      h4 Сделано для людей
+      h1 Воронеж
+      h4 майнкрафт по-русски
 
-.container
+.container-fluid.bg-dark
   .row
-    .text-xs-center
-      .h1 Создатели
+    .col-12.text-center
+      .h1 Местные божества
   .row.placeholders
-    .col-xs-6.placeholder.text-xs-center
-        img.img-fluid alt="Hellfireson" src=image_path("Hellfireson.jpg") width=200 height=200
-        h4 
-          a href="https://telegram.me/Hellfireson" Hellfireson
-          
-        span.text-muted Хостинг
-        
-    .col-xs-6.placeholder.text-xs-center
+    .col-6.placeholder.text-center
+        img.img-fluid alt="Чендальф Белый" src=image_path("che.jpg") width=200 height=200
+        h4
+          a href="https://telegram.me/CheNeVipyt" Чёндальф Белый
+
+        span.text-muted Хостит эту вашу фигню
+
+    .col-6.placeholder.text-center
         img.img-fluid alt="unn4m3d" src=image_path("unn4m3d.jpg") width=200 height=200
         h4
           a href="https://telegram.me/unn4m3d" unn4m3d
-        span.text-muted Лаунчер, сайт, обслуживание сервера
+        span.text-muted Фигачит код
 
 hr /
 
-.container
+.container-fluid.bg-dark
   .row
-    .text-xs-center
-      .h1 Исходный код
-  .row
-    .text-xs-center
-      h4 
-        | Лаунчер : 
-        a href="https://github.com/unn4m3d/klauncher" GitHub
-      h4
-        | Сайт :
-        a href="https://github.com/unn4m3d/tsmc" GitHub
-  
-hr /
-
-.container
-  .row
-    .text-xs-center
-      .h1 FAQ
-  .row
-    b Q : Почему вы разработали собственный лаунчер и сайт, а не использовали %лаунчер% и %CMS%?
-    p 
-      | A : Существующие решения не устраивали нас качеством кода, надежностью и некоторыми другими параметрами
-      table
-        tr
-          td 
-           b Лаунчер от sashok724
-          td 
-            ul 
-              li Некачественный код с сильной связанностью
-              li Самописная нерасширяемая сериализация (в старых версиях) 
-              li Активное использование Java 8 (в новых версиях)
-              li Веб-часть на PHP (в старых версиях) с использованием deprecated функций
-        tr
-          td
-            b Лаунчеры на .NET Framework
-           
-          td 
-            ul
-              li В случаях, когда у игрока нет .NET нужной версии, необходимо устанавливать .NET (в то время, как Java и так нужна для запуска Minecraft)
-              li Нет интероперабельности с Java кодом
-              
-        tr
-          td
-            b Лаунчеры на Delphi
-          td
-            ul
-              li Нет интероперабельности с Java кодом
-              li Практически некроссплатформенны
-              
-        tr
-          td
-            b.tsselect Наш лаунчер
-            
-          td
-            ul
-              li Маленькая степень связанности
-              li Написан на современном языке Kotlin (Код удобно читать)
-              li Веб-часть и сайт написаны на Ruby on Rails с использованием Slim, SASS и Bootstrap в соответствии с рекомендациями rubocop
+    .col-12.text-center.text-muted Хз чо тут еще написать...

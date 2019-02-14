@@ -1,35 +1,42 @@
-.jumbotron
-  .container.text-xs-center
-    h2 Регистрация
+.jumbotron.bg-dark
+  .container.text-center
+    .row.justify-content-center
+      .col-8
+        h2 Регистрация
 
-    == form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      == devise_error_messages!
-      .field
-        == f.label :username
-        br /
-        == f.text_field :username, autofocus: true
-  
-      .field
-        == f.label :email
-        br /
-        == f.email_field :email
-    
-      .field
-        == f.label :password
-        - if @minimum_password_length
-          em
-            | (
-            == @minimum_password_length
-            | characters minimum)
-        br /
-        == f.password_field :password, autocomplete: "off" 
+        == form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          == devise_error_messages!
+          .row
+            .col
+              == f.label :username
+            .col
+              == f.text_field :username, autofocus: true
 
-      .field
-        == f.label :password_confirmation
-        br /
-        == f.password_field :password_confirmation
-  
-      .actions
-        == f.submit "Регистрация", class: 'btn btn-primary'
-    p
-      == render "devise/shared/links"
+          .row
+            .col
+              == f.label :email
+            .col
+              == f.email_field :email
+
+          .row
+            .col
+              == f.label :password
+              - if @minimum_password_length
+                em
+                  | &nbsp;(
+                  == @minimum_password_length
+                  | &nbsp;characters minimum)
+            .col
+              == f.password_field :password, autocomplete: "off"
+
+          .row
+            .col
+              == f.label :password_confirmation
+            .col
+              == f.password_field :password_confirmation
+
+          .row
+            .col
+              == f.submit "Регистрация", class: 'btn btn-primary'
+          .row
+            == render "devise/shared/links"

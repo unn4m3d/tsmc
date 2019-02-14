@@ -1,35 +1,34 @@
-.navbar.navbar-light.bg-faded
-  .navbar-inner 
-    .container
-      a.navbar-brand href='/' 
-        img.d-inline-block.align-top src=image_path("logo.png") alt="" width=30 height=30
-        | The Sinner
-      ul.nav.navbar-nav
-        li.nav-item.active
-          a.nav-link href="/" Главная
-        li.nav-item.dropdown
-          a.nav-link.dropdown-toggle href="#" id="start-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Начать игру
-          .dropdown-menu aria-labelledby="start-dropdown"
+nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
+  a.navbar-brand href='/'
+    img.d-inline-block.align-top src=image_path("logo.png") alt="" width=30 height=30
+    | Voronezh
+  button.navbar-toggler type="button" data-toggle="collapse" data-target="#ts-navbar" aria-controls="ts-navbar"
+    span.navbar-toggler-icon
+  .collapse.navbar-collapse.justify-content-between#ts-navbar
+    ul.navbar-nav
+      li.nav-item.active
+        a.nav-link href="/" Главная
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle href="#" id="start-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Начать игру
+        .dropdown-menu aria-labelledby="start-dropdown"
+          a.dropdown-item href=new_user_registration_path Регистрация
+          a.dropdown-item href=home_launcher_path Скачать лаунчер
+      li.nav-item
+        a.nav-link href=home_about_path О проекте
+    ul.navbar-nav
+      li.nav-item.dropdown
+        - if user_signed_in?
+          a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            | Привет,
+            strong
+              == current_user.username
+            | !
+          .dropdown-menu aria-labelledby="profile-menu"
+            a.dropdown-item href=home_minecraft_settings_path Загрузить скин или плащ
+            a.dropdown-item href=destroy_user_session_path data-method="delete" Выйти
+        - else
+          a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            | Привет, Гость!
+          .dropdown-menu aria-labelledby="profile-menu"
+            a.dropdown-item href=user_session_path Войти
             a.dropdown-item href=new_user_registration_path Регистрация
-            a.dropdown-item href=home_launcher_path Скачать лаунчер
-        li.nav-item
-          a.nav-link href=home_about_path О проекте
-      ul
-      ul.nav.navbar-nav.float-xs-right
-        li.nav-item.dropdown 
-          - if user_signed_in?
-            a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              | Привет,
-              strong 
-                == current_user.username
-              | !
-            .dropdown-menu aria-labelledby="profile-menu"
-              a.dropdown-item href=home_minecraft_settings_path Загрузить скин или плащ
-              a.dropdown-item href=destroy_user_session_path data-method="delete" Выйти
-          - else
-            a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              | Привет, Гость!
-            .dropdown-menu aria-labelledby="profile-menu"
-              a.dropdown-item href=user_session_path Войти
-              a.dropdown-item href=new_user_registration_path Регистрация
-  

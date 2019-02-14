@@ -74,3 +74,9 @@ progress[value] {
 span.header{
   font-size: 25px;
 }
+
+body {
+  background-image: image_url("bedrock.png");
+  background-repeat: repeat-x repeat-y;
+  background-size: 64px;
+}

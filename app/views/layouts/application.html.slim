@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title V.O.R.O.N.E.Z.H.
+    title Minecraft server
     == csrf_meta_tags
     == stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     == javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -15,7 +15,9 @@ html
     == yield
 
   footer
-    .container-fluid.text-center 
-      | Че, пацаны, фефу?
-      /[if IE]
-        .alert This site won't work correctly with IE
+    .container-fluid.bg-dark
+      .row
+        .col-12.text-center
+          | Че, пацаны, фефу?
+          /[if IE]
+            .alert This site won't work correctly with IE

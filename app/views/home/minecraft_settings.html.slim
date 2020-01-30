@@ -1,26 +1,27 @@
-.container
-  .col-xs-6.text-xs-center#skin-container
-    .card
-      img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /
-      .card-block
-        h4.card-title Скин
-        p.card-text 
-          | Скин в формате PNG размером 64х32 или 64х64
-          #skin-form
-            == form_for :skin, url: update_skin_path, html: { multipart: true } do |f|
-              == f.file_field :skin
-              == f.submit "Загрузить", class: 'btn btn-primary'
+.container.bg-dark.text-center
+  .row
+    .col-6.text-center#skin-container
+      .card.bg-dark
+        img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /
+        .card-block
+          h4.card-title Скин
+          p.card-text 
+            | Скин в формате PNG размером 64х32 или 64х64
+            #skin-form
+              == form_for :skin, url: update_skin_path, html: { multipart: true } do |f|
+                == f.file_field :skin
+                == f.submit "Загрузить", class: 'btn btn-primary'
             
-  .col-xs-6.text-xs-center#cape-container
-    .card
-      img.card-img-top#cape-pretty src=@pretty_cape_url alt="No cape" /
-      .card-block
-        h4.card-title Плащ
-        p.card-text
-          | Плащ в формате PNG размером 64x32 или 22x17
-          #cape-form
-            == form_for :cape, url: update_cape_path, html: { multipart: true } do |f|
-              == f.file_field :cape
-              == f.submit "Загрузить", class: 'btn btn-primary'
+    .col-6.text-center#cape-container
+      .card.bg-dark
+        img.card-img-top#cape-pretty src=@pretty_cape_url alt="No cape" /
+        .card-block
+          h4.card-title Плащ
+          p.card-text
+            | Плащ в формате PNG размером 64x32 или 22x17
+            #cape-form
+              == form_for :cape, url: update_cape_path, html: { multipart: true } do |f|
+                == f.file_field :cape
+                == f.submit "Загрузить", class: 'btn btn-primary'
         
       

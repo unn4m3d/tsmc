@@ -52,12 +52,14 @@ module ApiHelper
   end
 
   def pretty_stats(stats)
+    return {}, [] if stats.empty?
     current_time = stats.first.time
 
     labels = []
 
     output = {}
     stats.each do |s|
+      next if s.nil?
       output[pretty_time(current_time, s.time)] ||= {}
       output[pretty_time(current_time, s.time)][s.server.name] = s
       labels << s.server.name unless labels.include? s.server.name

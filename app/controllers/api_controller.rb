@@ -31,9 +31,9 @@ class ApiController < ApplicationController
   def launcher
     platform = params[:platform]
     if platform.nil? || Settings.launcher_path[platform.to_sym].nil?
-      render text: public_path(Settings.launcher_path.generic)
+      render plain: Settings.launcher_path.generic
     else
-      render text: public_path(Settings.launcher_path[platform.to_sym])
+      render plain: Settings.launcher_path[platform.to_sym]
     end
   end
 
@@ -45,8 +45,10 @@ class ApiController < ApplicationController
     sid = data['accessToken']
     server = data['serverId']
 
-    sessions = Session.where(uuid: uuid, session: sid)
+    puts data
 
+    sessions = Session.where(uuid: uuid, session: sid)
+    puts sessions.empty?
     if [uuid.to_s, sid.to_s, server.to_s, sessions].any?(&:empty?)
       render json: { error: 'Bad login', errorMessage: 'Bad login' }
       return
@@ -215,7 +217,7 @@ end
   # Yggdrasil method
   def profile
     @uuid = params[:uuid]
-    sessions = Session.where(uuid: @uuid)
+    sessions = Session.where(uuid: @uuid.gsub('-', ''))
     if sessions.empty?
       render status: :no_content
       return

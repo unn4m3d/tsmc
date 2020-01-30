@@ -1,34 +1,41 @@
-nav.navbar.navbar-dark.bg-dark.navbar-expand-lg
-  a.navbar-brand href='/'
-    img.d-inline-block.align-top src=image_path("logo.png") alt="" width=30 height=30
-    | Voronezh
-  button.navbar-toggler type="button" data-toggle="collapse" data-target="#ts-navbar" aria-controls="ts-navbar"
-    span.navbar-toggler-icon
-  .collapse.navbar-collapse.justify-content-between#ts-navbar
-    ul.navbar-nav
-      li.nav-item.active
-        a.nav-link href="/" Главная
-      li.nav-item.dropdown
-        a.nav-link.dropdown-toggle href="#" id="start-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Начать игру
-        .dropdown-menu aria-labelledby="start-dropdown"
-          a.dropdown-item href=new_user_registration_path Регистрация
-          a.dropdown-item href=home_launcher_path Скачать лаунчер
-      li.nav-item
-        a.nav-link href=home_about_path О проекте
-    ul.navbar-nav
-      li.nav-item.dropdown
-        - if user_signed_in?
-          a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            | Привет,
-            strong
-              == current_user.username
-            | !
-          .dropdown-menu aria-labelledby="profile-menu"
-            a.dropdown-item href=home_minecraft_settings_path Загрузить скин или плащ
-            a.dropdown-item href=destroy_user_session_path data-method="delete" Выйти
-        - else
-          a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            | Привет, Гость!
-          .dropdown-menu aria-labelledby="profile-menu"
-            a.dropdown-item href=user_session_path Войти
+.navbar.navbar-light.bg-faded.navbar-expand-lg.p-3.w-100
+  .navbar-inner.w-100
+    .container-fluid.w-100
+      a.navbar-brand href='/' 
+        img.d-inline-block.align-top src=image_path("logo.png") alt="" width=30 height=30
+        | Горное дело
+      ul.nav.navbar-nav
+        li.nav-item.active
+          a.nav-link href="/" Главная
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle href="#" id="start-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Начать игру
+          .dropdown-menu aria-labelledby="start-dropdown"
             a.dropdown-item href=new_user_registration_path Регистрация
+            a.dropdown-item href=home_launcher_path Скачать лаунчер
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle href="#" id="help-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Помощь
+          .dropdown-menu aria-labelledby="help-dropdown"
+            a.dropdown-item href=help_index_url Начало игры
+            a.dropdown-item href=help_craftbook_url Механизмы (CraftBook)
+            a.dropdown-item href=help_commandbook_url Полезные команды (CommandBook)
+            a.dropdown-item href=help_worldguard_url Приват регионов (WorldGuard)
+            a.dropdown-item href=help_faq_url FAQ
+      ul
+      ul.nav.navbar-nav.float-right
+        li.nav-item.dropdown 
+          - if user_signed_in?
+            a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              | Привет,
+              strong 
+                == current_user.username
+              | !
+            .dropdown-menu aria-labelledby="profile-menu"
+              a.dropdown-item href=home_minecraft_settings_path Загрузить скин или плащ
+              a.dropdown-item href=destroy_user_session_path data-method="delete" Выйти
+          - else
+            a.nav-link.dropdown-toggle href="#" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              | Привет, Гость!
+            .dropdown-menu aria-labelledby="profile-menu"
+              a.dropdown-item href=user_session_path Войти
+              a.dropdown-item href=new_user_registration_path Регистрация
+  

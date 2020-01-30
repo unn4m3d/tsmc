@@ -13,19 +13,19 @@
 ActiveRecord::Schema.define(version: 20190214125808) do
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.text     "text"
-    t.string   "category"
+    t.string "title"
+    t.integer "user_id"
+    t.text "text"
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "server_stats", force: :cascade do |t|
-    t.integer  "server_id"
-    t.boolean  "online"
-    t.integer  "players"
+    t.integer "server_id"
+    t.boolean "online"
+    t.integer "players"
     t.datetime "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,49 +33,49 @@ ActiveRecord::Schema.define(version: 20190214125808) do
   end
 
   create_table "servers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "short_name"
-    t.string   "version"
-    t.string   "ip"
-    t.integer  "port"
+    t.string "name"
+    t.string "short_name"
+    t.string "version"
+    t.string "ip"
+    t.integer "port"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["short_name"], name: "index_servers_on_short_name", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "session"
-    t.string   "serverid"
-    t.string   "uuid"
+    t.integer "user_id"
+    t.string "session"
+    t.string "serverid"
+    t.string "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "key"
+    t.string "key"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "username"
-    t.string   "role"
-    t.string   "cape_file_name"
-    t.string   "cape_content_type"
-    t.bigint   "cape_file_size"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "role"
+    t.string "cape_file_name"
+    t.string "cape_content_type"
+    t.bigint "cape_file_size"
     t.datetime "cape_updated_at"
-    t.string   "skin_file_name"
-    t.string   "skin_content_type"
-    t.bigint   "skin_file_size"
+    t.string "skin_file_name"
+    t.string "skin_content_type"
+    t.bigint "skin_file_size"
     t.datetime "skin_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

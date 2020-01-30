@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'help/index'
+
+  get 'help/commandbook'
+
+  get 'help/worldguard'
+
+  get 'help/craftbook'
+
+  get 'help/faq'
+
+  get 'help/economy'
+
   # Posts
   get 'posts/index'
 
@@ -18,8 +30,8 @@ Rails.application.routes.draw do
   post 'api/join'
   get 'api/has_joined'
   post 'api/has_joined'
-  get 'api/profile/:user/', to: 'api#profile'
-  post 'api/profile/:user/', to: 'api#profile'
+  get 'api/profile/:uuid/', to: 'api#profile'
+  post 'api/profile/:uuid/', to: 'api#profile'
 
   # API
   get 'api/auth'

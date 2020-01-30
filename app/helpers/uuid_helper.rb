@@ -29,7 +29,7 @@ module UuidHelper
 
     sprintf(
       '%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
-      (t_lo.to_i & 0xFFFFFFFF), t_mi, t_hi, cs_hi, cs_lo, *(raw_d[5..-1])
+      (t_lo.to_i & 0xFFFFFFFF), (t_mi.to_i & 0xFFFF), (t_hi.to_i & 0xFFFF), (cs_hi.to_i & 0xFF), (cs_lo.to_i & 0xFF), *(raw_d[5..-1])
     )
   end
 end

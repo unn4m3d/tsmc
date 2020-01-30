@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require tether
+//= require popper
 //= require bootstrap
 //= require jquery_ujs
 //= require turbolinks
-//= require Chart
+//= require Chart.min
 //= require_tree .

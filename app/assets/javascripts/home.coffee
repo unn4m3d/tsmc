@@ -2,14 +2,32 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+api_badge_class = (players, max) ->
+  if players == 0
+    "badge-primary"
+  else if players < max * 3 / 4
+    "badge-success"
+  else if players < max - 1
+    "badge-warning"
+  else
+    "badge-danger"
+
+api_badge = (sdata) ->
+  if sdata.online
+    "<span class='badge #{api_badge_class(sdata.players, sdata.max)}'>#{sdata.players}/#{sdata.max}</span>"
+  else
+    "<span class='badge badge-secondary'>offline</span>"
+
+api_ver_badge = (version) ->
+  "<span class='badge badge-primary'>#{version}</span>"
+
 api_create_progress = (elem,sdata) ->
   console.log("Writing info")
   id = "server-#{sdata.name}"
+  elem.append $("<div class='text-xs-center' id='#{id}'></div>").html("#{sdata.name} #{api_ver_badge(sdata.version)} #{api_badge(sdata)}")
   if sdata.online
-    elem.append $("<div class='text-xs-center' id='#{id}'></div>").text("#{sdata.name} #{sdata.players}/#{sdata.max}")
     elem.append $("<progress class='progress' value='#{sdata.players.replace(/[^0-9]/g,'')}' max='#{sdata.max.replace(/[^0-9]/g,'')}' aria-describedby='#{id}' />")
   else
-    elem.append $("<div class='text-xs-center' id='#{id}'></div>").text("#{sdata.name} offline")
     elem.append $("<progress class='progress server-full' value='1' max='1' aria-describedby='#{id}' />")
 
 api_write_error = (elem,json) ->

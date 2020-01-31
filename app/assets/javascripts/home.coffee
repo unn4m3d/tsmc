@@ -49,27 +49,22 @@ api_write_info = (elem,short_name) ->
       api_write_error elem,
         error: "Cannot retrieve data"
 
-window.onload = () ->
+api_draw = (json) ->
   console.log "Loading"
   mondiv = $("#tsmon")
   if mondiv.length
     console.log("Monitoring enabled")
-    $.ajax
-      url: "/api/servers"
-      dataType: "json"
-      success: (json) ->
-        console.log json
-        mondiv.empty()
-        mondiv.append($("<h3>Мониторинг</h3>"))
-        mondiv.append("<!-- Generated in app/assets/javascripts/home.coffee -->")
-        if json.servers? && json.servers.length > 0
-          for serv in json.servers
-            console.log serv
-            api_write_info mondiv, serv.shortName
-        else
-          mondiv.append($("<div class='text-muted'></div>").text("Не найдены сервера"))
-      error: (json) ->
-        console.log json
+    console.log json
+    mondiv.empty()
+    mondiv.append($("<h3>Мониторинг</h3>"))
+    mondiv.append("<!-- Generated in app/assets/javascripts/home.coffee -->")
+    if json.servers? && json.servers.length > 0
+      for serv in json.servers
+        console.log serv
+        api_write_info mondiv, serv.shortName
+    else
+      mondiv.append($("<div class='text-muted'></div>").text("Не найдены сервера"))
+
   else
     console.log("Monitoring disabled")
 
@@ -87,12 +82,29 @@ window.onload = () ->
           options:
             scales:
               xAxes : [
-                type: time
+                type: 'time'
                 time:
                   unit: 'minute'
                   distribution: 'linear'
+                  parser: moment
+              ]
+              yAxes : [
+                type: 'linear'
+                ticks:
+                  suggestedMin: 0
               ]
       error: (json) ->
         console.error json
   else
     console.log("Graph disabled")
+
+window.onload = () ->
+  console.log("home.coffee loaded")
+  $.ajax
+    url: "/api/servers"
+    dataType: "json"
+    success: (json) ->
+      console.log(json)
+      api_draw json
+    error: (json) ->
+      console.log json

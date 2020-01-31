@@ -225,4 +225,15 @@ end
     @username = sessions.first.user.username
     @textures = gen_texdata @uuid, @username, sessions.first.user
   end
+
+  def player
+    @username = params[:username]
+
+    @user = User.where(username: @username).first
+    if @user.nil?
+      @error = "No such user"
+    else
+      @groups = @user.roles
+    end
+  end
 end

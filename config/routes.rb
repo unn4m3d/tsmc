@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'api/session', to: 'api#get_session'
   get 'api/news'
   get 'api/graph'
+  get 'api/player'
   devise_for :users
   get 'home/index'
 
@@ -52,7 +53,9 @@ Rails.application.routes.draw do
 
   get 'home/pretty_skin/:id', to: 'home#pretty_skin', as: 'pretty_skin'
   get 'home/pretty_cape/:id', to: 'home#pretty_cape', as: 'pretty_cape'
-  get 'home/minecraft_settings'
+  get 'home/profile', to: 'home#profile'
+  get 'home/profile/:id', to: 'home#profile'
+  get 'home/not_found', as: 'not_found'
   post 'home/update_skin', as: 'update_skin'
   post 'home/update_cape', as: 'update_cape'
   post 'home/update_avatar', as: 'update_avatar'

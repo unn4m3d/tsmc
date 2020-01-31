@@ -11,30 +11,53 @@ class HomeController < ApplicationController
   def launcher
   end
 
-  def minecraft_settings
-    unless user_signed_in?
-      redirect_to new_user_session_path
+  def profile
+    id = params[:id]
+
+    if id.nil? || id.to_s.empty?
+      if user_signed_in?
+        @user = current_user
+      else
+        redirect_to new_user_session_path
+        return
+      end
+    elsif id.to_s.match /^[0-9]+$/
+      @user = User.find id.to_i
+    else
+      @user = User.where(username: id).first
+    end
+
+    if @user.nil?
+      redirect_to not_found_path
       return
     end
-    @skin_url = current_user.skin_url
-    @cape_url = current_user.cape_url
-    @pretty_skin_url = pretty_skin_path(current_user)
-    @pretty_cape_url = pretty_cape_path(current_user)
+
+    @skin_url = @user.skin_url
+    @cape_url = @user.cape_url
+    @pretty_skin_url = pretty_skin_path(@user)
+    @pretty_cape_url = pretty_cape_path(@user)
     @has_cape = !@cape_url.empty?
-    @avatar_url = current_user.avatar_url
+    @avatar_url = @user.avatar_url
     @has_avatar = !@avatar_url.empty? && !@avatar_url.nil?
   end
 
+  def not_found
+  end
+
   def update_skin
-    current_user.skin = params[:skin][:skin]
-    current_user.save!
-    redirect_to home_minecraft_settings_path
+    user = User.find(params[:id])
+    authorize! :manage, user
+    user.skin = params[:skin][:skin]
+    user.save!
+    redirect_to home_profile_path
   end
 
   def update_avatar
-    current_user.avatar = params[:avatar][:avatar]
-    current_user.save!
-    redirect_to home_minecraft_settings_path
+    user = User.find(params[:id])
+    authorize! :manage, user
+    user.avatar = params[:avatar][:avatar]
+    user.save!
+    redirect_to home_profile_path
   end
 
   def pretty_skin
@@ -71,8 +94,10 @@ class HomeController < ApplicationController
   end
 
   def update_cape
-    current_user.cape = params[:cape][:cape]
-    current_user.save!
-    redirect_to home_minecraft_settings_path
+    user = User.find(params[:id])
+    authorize! :manage, user
+    user.cape = params[:cape][:cape]
+    user.save!
+    redirect_to home_profile_path
   end
 end

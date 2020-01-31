@@ -32,6 +32,13 @@ class User < ApplicationRecord
     size: { less_than: 250.kilobytes }
   )
 
+  has_attached_file :avatar
+  validates_attachment(
+    :avatar,
+    content_type: { content_type: ['image/png', 'image/gif', 'image/jpeg']},
+    size: {less_than: 750.kilobytes }
+  )
+
   def validate_username
     if username_changed? && persisted?
       errors.add(:username, 'Cannot change username')
@@ -53,6 +60,14 @@ class User < ApplicationRecord
       cape.url
     else
       ''
+    end
+  end
+
+  def avatar_url
+    if avatar
+      avatar.url
+    else
+      nil
     end
   end
 

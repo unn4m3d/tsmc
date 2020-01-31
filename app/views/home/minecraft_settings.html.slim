@@ -1,5 +1,5 @@
 .container.bg-dark.text-center
-  .row
+  //.row
     .col-6.text-center#skin-container
       .card.bg-dark
         img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /
@@ -13,6 +13,48 @@
                 == f.submit "Загрузить", class: 'btn btn-primary'
             
     .col-6.text-center#cape-container
+      .card.bg-dark
+        img.card-img-top#cape-pretty src=@pretty_cape_url alt="No cape" /
+        .card-block
+          h4.card-title Плащ
+          p.card-text
+            | Плащ в формате PNG размером 64x32 или 22x17
+            #cape-form
+              == form_for :cape, url: update_cape_path, html: { multipart: true } do |f|
+                == f.file_field :cape
+                == f.submit "Загрузить", class: 'btn btn-primary'
+  .row
+    .col-4
+      .card.bg-dark
+        img.card-img-top#avatar src=@avatar_url alt="No avatar" /
+        .card-body
+          h4.card-title
+            == current_user.username
+          p.card-text
+            .badges
+              - if current_user.roles.empty?
+                span.badge.badge-secondary user
+              - else
+                - for urole in current_user.roles
+                  span class=badge_class(urole)
+                    == urole
+            ul.list-group.bg-dark
+              li.list-group-item.bg-dark.text-right
+                #avatar-form
+                  == form_for :avatar, url: update_avatar_path, html: { multipart: true} do |f|
+                    == f.file_field :avatar
+                    == f.submit "Загрузить аватар", class: 'btn btn-primary'
+    .col-8.text-center
+      .card.bg-dark
+        img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /
+        .card-body
+          h4.card-title Скин
+          p.card-text
+            | Скин в формате PNG размером 64x32 или 64х64
+            #skin-form
+              == form_for :skin, url: update_skin_path, html: { multipart: true } do |f|
+                == f.file_field :skin
+                == f.submit "Загрузить", class: 'btn btn-primary'
       .card.bg-dark
         img.card-img-top#cape-pretty src=@pretty_cape_url alt="No cape" /
         .card-block

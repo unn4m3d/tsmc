@@ -51,4 +51,20 @@ module HomeHelper
       nil
     end
   end
+
+  def badge_class(role)
+    "badge badge-" +
+    case role
+    when "admin"
+      "primary"
+    when "moderator"
+      "warning"
+    when "helper"
+      "success"
+    when "banned"
+      "danger"
+    else
+      "secondary"
+    end
+  end
 end

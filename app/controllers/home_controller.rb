@@ -21,6 +21,8 @@ class HomeController < ApplicationController
     @pretty_skin_url = pretty_skin_path(current_user)
     @pretty_cape_url = pretty_cape_path(current_user)
     @has_cape = !@cape_url.empty?
+    @avatar_url = current_user.avatar_url
+    @has_avatar = !@avatar_url.empty? && !@avatar_url.nil?
   end
 
   def update_skin
@@ -29,10 +31,17 @@ class HomeController < ApplicationController
     redirect_to home_minecraft_settings_path
   end
 
+  def update_avatar
+    current_user.avatar = params[:avatar][:avatar]
+    current_user.save!
+    redirect_to home_minecraft_settings_path
+  end
+
   def pretty_skin
     user = User.find(params[:id])
     puts 'Starting...'
-    data = prettify_skin(user.skin.path, 320)
+    path = user.skin.blank? ? "public/default_skin.png" : user.skin.path
+    data = prettify_skin(path, 320)
     if data
       send_data(
         data,

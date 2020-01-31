@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   get 'home/minecraft_settings'
   post 'home/update_skin', as: 'update_skin'
   post 'home/update_cape', as: 'update_cape'
+  post 'home/update_avatar', as: 'update_avatar'
 
   root to: 'home#index'
 end

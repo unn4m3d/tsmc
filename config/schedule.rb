@@ -21,5 +21,5 @@
 require 'rails' # Rails.env
 
 every 15.minutes do
-  runner "ServerStat.stat_all", output: "/home/unn4m3d/logs/stat_all.log", environment: Rails.env
+  runner "ServerStat.stat_all", output: "log/stat_all.log", environment: Rails.env
 end

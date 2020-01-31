@@ -12,30 +12,30 @@
         == f.email_field :email
         
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        .warning
-          | Currently waiting confirmation for : &nbsp;
-          = resource.unconfirmed_email
+        .alert.alert-warning
+          = t('devise.registrations.edit.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email)
       
       .field
-        == f.label :password
+        == f.label :password, t('devise.passwords.edit.new_password')
         i 
-          | (Leave blank if you don't want to change it)
+          = t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it')
         br /
         == f.password_field :password, autocomplete: :off
       
       .field
-        == f.label :password_confirmation
+        == f.label :password_confirmation, t('devise.passwords.edit.confirm_new_password')
         br /
         == f.password_field :password_confirmation, autocomplete: :off
         
       .field
-        == f.label :current_password
-        i (We need your password to confirm changes)
+        == f.label :current_password, t('devise.passwords.current')
+        i
+          = t('devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes')
         br /
         == f.password_field :current_password, autocomplete: :off
       
       .actions
-        == f.submit "Submit changes", class: 'btn btn-primary'
+        == f.submit t('devise.registratons.edit.update'), class: 'btn btn-primary'
         
     p 
       = t('devise.registrations.edit.unhappy')

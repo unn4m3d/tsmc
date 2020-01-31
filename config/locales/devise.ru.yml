@@ -49,6 +49,7 @@ ru:
       failure: Вы не можете войти в систему с учетной записью из %{kind}, т.к. "%{reason}".
       success: Вход в систему выполнен с учетной записью из %{kind}.
     passwords:
+      current: Ваш пароль
       edit:
         change_my_password: Изменить мой пароль
         change_your_password: Изменить пароль

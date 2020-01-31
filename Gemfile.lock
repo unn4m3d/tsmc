@@ -152,6 +152,8 @@ GEM
     mini_racer (0.2.9)
       libv8 (>= 6.9.411)
     minitest (5.14.0)
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
     mysql2 (0.5.3)
     nio4r (2.5.2)
     nokogiri (1.10.7)
@@ -285,6 +287,7 @@ DEPENDENCIES
   mineskin (~> 0.0.2)
   minestat!
   mini_racer
+  momentjs-rails (~> 2.20.0)
   mysql2 (~> 0.5.3)
   paperclip (~> 6.1.0)
   puma (~> 3.0)

@@ -44,11 +44,12 @@ module ApiHelper
   end
 
   def pretty_time(last, current)
-    if last.to_date == current.to_date
-      current.strftime('%l:%M %p')
-    else
-      current.strftime('%d %b %l:%M %p')
-    end
+    #if last.to_date == current.to_date
+    #  current.strftime('%l:%M %p')
+    #else
+    # current.strftime('%d %b %l:%M %p')
+    #end
+    current.iso8601
   end
 
   def pretty_stats(stats)

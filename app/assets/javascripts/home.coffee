@@ -84,6 +84,14 @@ window.onload = () ->
         new Chart graph,
           type: 'line'
           data: json
+          options:
+            scales:
+              xAxes : [
+                type: time
+                time:
+                  unit: 'minute'
+                  distribution: 'linear'
+              ]
       error: (json) ->
         console.error json
   else

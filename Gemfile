@@ -30,16 +30,16 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise'
-gem 'cancancan'
+gem 'devise', '~> 4.7.1'
+gem 'cancancan', '~> 3.0.2'
 gem 'bootstrap', '~> 4.4.1'
-gem 'slim-rails'
-gem 'sprockets-rails'
-gem 'tether-rails'
-gem 'config'
+gem 'slim-rails', '~> 3.2.0'
+gem 'sprockets-rails', '~> 3.2.0'
+gem 'tether-rails', '~> 1.4.0'
+gem 'config', '~> 2.2.1'
 gem 'minestat', git: 'https://github.com/unn4m3d/minestat_old'
-gem 'mineskin'
-gem 'paperclip'
+gem 'mineskin', '~> 0.0.2'
+gem 'paperclip', '~> 6.1.0'
 gem 'listen', '~> 3.0.5'
 
 group :development, :test do
@@ -57,15 +57,12 @@ group :development do
   gem "sqlite3", '~> 1.3.6'
 end
 
-group :production do
-  gem "mysql2"
-end
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 
-gem 'aescrypt'
+gem 'aescrypt', '~> 1.0.0'
 gem 'whenever', require: false
-gem 'chart-js-rails'
-gem 'mysql2'
-gem "hirb"
+gem 'chart-js-rails', '~> 0.1.7'
+gem 'mysql2','~> 0.5.3'
+gem 'hirb', '~> 0.7.3'
+gem 'redcarpet', '~> 3.5.0'

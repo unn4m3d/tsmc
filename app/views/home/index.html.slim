@@ -31,15 +31,14 @@
     .row
       - for post in @posts[i*3...i*3+3]
         .col-4
-          .card
+          .card.bg-dark.border-light
             .card-block
               .card-title
                 span.header
                   = post.title
                 span.text-muted
                  | &nbsp;by&nbsp;
-                 == post.user.username
+                 = post.user.username
               p.card-text
-                == truncate post.text, length: 200, separator: ' ' do
-                  == link_to "More", post_path(post)
+                == render_md(truncate post.text, length: 200, separator: ' ')
               a.btn.btn-primary href=post_path(post) Прочитать

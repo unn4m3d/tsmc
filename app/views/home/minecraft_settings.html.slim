@@ -39,11 +39,14 @@
                   span class=badge_class(urole)
                     == urole
             ul.list-group.bg-dark
-              li.list-group-item.bg-dark.text-right
+              li.list-group-item.bg-dark.text-center
                 #avatar-form
                   == form_for :avatar, url: update_avatar_path, html: { multipart: true} do |f|
                     == f.file_field :avatar
                     == f.submit "Загрузить аватар", class: 'btn btn-primary'
+              - if can? :edit, current_user
+                li.list-group-item.bg-dark.text-center
+                  == link_to "Изменить данные", edit_user_registration_path, class: 'btn btn-secondary'
     .col-8.text-center
       .card.bg-dark
         img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /

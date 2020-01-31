@@ -1,10 +1,10 @@
 == link_to "Back", :back, class: 'btn'
-.jumbotron
+.jumbotron.bg-dark
   .container.text-center
     h2
       | Edit &nbsp;
       == resource_name.to_s.humanize
-    == form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| 
+    == form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| 
       == devise_error_messages!
       
       .field
@@ -19,7 +19,8 @@
       
       .field
         == f.label :password
-        i (Leave blank if you don't want to change it)
+        i 
+          | (Leave blank if you don't want to change it)
         br /
         == f.password_field :password, autocomplete: :off
       

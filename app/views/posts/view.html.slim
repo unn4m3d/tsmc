@@ -1,11 +1,11 @@
-.container
+.container.bg-dark.p-4
   .row
     h1
-      == @post.title
-      
+      = @post.title
+  .row
     .col-xs-8
       p 
-        = @post.text
+        == render_md @post.text
         
       hr /
       h6.text-muted

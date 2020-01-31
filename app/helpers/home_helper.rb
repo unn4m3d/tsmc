@@ -1,5 +1,6 @@
 require 'rmagick'
 require 'mineskin'
+require 'redcarpet'
 
 # Helpers
 module HomeHelper
@@ -66,5 +67,21 @@ module HomeHelper
     else
       "secondary"
     end
+  end
+
+  def render_md(text)
+    @md ||= Redcarpet::Markdown.new( Redcarpet::Render::HTML, {
+      fenced_code_blocks: true,
+      tables: true,
+      strikethrough: true,
+      superscript: true,
+      underline: true,
+      highlight: true,
+      quote: true,
+      footnotes: true,
+      autolink: true
+    })
+
+    @md.render text
   end
 end

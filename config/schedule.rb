@@ -21,5 +21,5 @@
 require 'rails' # Rails.env
 
 every 15.minutes do
-  runner "ServerStat.stat_all", output: "log/stat_all.log", environment: Rails.env
+  command "bash #{File.dirname(File.dirname(File.expand_path(__FILE__)))}/stat_all.sh"
 end

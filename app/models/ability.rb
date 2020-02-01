@@ -12,7 +12,7 @@ class Ability
     can :manage, user
     can :edit, user
     
-    if user.is? :vip || user.is? :premium
+    if user.is?(:vip) || user.is?(:premium)
       can :assign_prefix, user
     end
   end

@@ -44,7 +44,13 @@ Rails.application.routes.draw do
   get 'api/news'
   get 'api/graph'
   get 'api/player'
-  devise_for :users
+  devise_for :users, controllers: {
+    confirmations: 'user/confirmations',
+    passwords: 'user/passwords',
+    registrations: 'user/registrations',
+    sessions: 'user/sessions',
+    unlocks: 'user/unlocks'
+  }
   get 'home/index'
 
   get 'home/about'

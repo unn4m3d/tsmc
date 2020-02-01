@@ -59,6 +59,8 @@ Rails.application.routes.draw do
   post 'home/update_skin', as: 'update_skin'
   post 'home/update_cape', as: 'update_cape'
   post 'home/update_avatar', as: 'update_avatar'
+  post 'home/role', to: 'home#add_role', as: "user_role"
+  delete 'home/role', to: 'home#delete_role', as: "delete_user_role"
 
   root to: 'home#index'
 end

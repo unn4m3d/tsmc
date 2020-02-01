@@ -31,13 +31,23 @@
           h4.card-title
             = @user.username
           p.card-text
-            .badges
+            ul.badges.list-group.bg-dark
               - if @user.roles.empty?
-                span.badge.badge-secondary user
+                li.badge.badge-secondary.list-group-item.bg-dark user
               - else
                 - for urole in @user.roles
-                  span class=badge_class(urole)
-                    = urole
+                  li.list-group-item.bg-dark.role-badge
+                    span class=badge_class(urole)
+                      = urole
+                    - if can? :assign, :roles
+                      == link_to 'x', delete_user_role_path(user: {id: @user.id, role: urole}), data: { confirm: t('devise.registrations.edit.are_you_sure') }, method: :delete, class: 'badge badge-danger'
+              - if can? :assign, :roles
+                li.list-group-item.bg-dark
+                  == form_for :user, url: user_role_path, class: 'form-inline' do |f|
+                    == f.text_field :role
+                    input type="hidden" name="user[id]" value=@user.id
+                    == f.submit "+", class: 'btn btn-primary'
+                      
             ul.list-group.bg-dark
               - if can? :manage, @user
                 li.list-group-item.bg-dark.text-center

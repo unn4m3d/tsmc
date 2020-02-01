@@ -100,4 +100,24 @@ class HomeController < ApplicationController
     user.save!
     redirect_to home_profile_path
   end
+
+  def add_role
+    authorize! :assign, :roles
+    u = User.find(params[:user][:id])
+    roles = u.roles
+    roles << params[:user][:role]
+    u.role = roles.join(';')
+    u.save!
+    redirect_to home_profile_path
+  end
+
+  def delete_role
+    authorize! :assign, :roles
+    u = User.find(params[:user][:id])
+    roles = u.roles
+    roles.delete(params[:user][:role])
+    u.role = roles.join(';')
+    u.save!
+    redirect_to home_profile_path
+  end
 end

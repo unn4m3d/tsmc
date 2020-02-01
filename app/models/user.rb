@@ -17,6 +17,8 @@ class User < ApplicationRecord
     case_sensitive: false
   }
 
+  validates_format_of :prefix, with: /^[A-Z]{0,5}$/, multiline: true
+
   has_attached_file :skin
   has_attached_file :cape
   validates_attachment(

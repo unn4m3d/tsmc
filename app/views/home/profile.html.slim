@@ -58,6 +58,14 @@
                       == f.submit "Загрузить аватар", class: 'btn btn-primary'
                 li.list-group-item.bg-dark.text-center
                   == link_to "Изменить данные", edit_user_registration_path, class: 'btn btn-secondary'
+    
+              - unless @user.prefix.empty?
+                li.list-group-item.bg-dark.text-center
+                  | Префикс :&nbsp;
+                  span.badge.badge-primary
+                    | [
+                    = @user.prefix
+                    | ]
     .col-8.text-center
         .card.bg-dark
           img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /

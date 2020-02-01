@@ -234,6 +234,11 @@ end
       @error = "No such user"
     else
       @groups = @user.roles
+      if @user.is?(:vip) || @user.is?(:premium)
+        @prefix = @user.prefix
+      else
+        @prefix = ""
+      end
     end
   end
 end

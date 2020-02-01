@@ -37,8 +37,9 @@
                 span.header
                   = post.title
                 span.text-muted
-                 | &nbsp;by&nbsp;
-                 = post.user.username
+                  | &nbsp;by&nbsp;
+                  a href=home_profile_path(id: post.user.id)
+                    = post.user.username
               p.card-text
                 == render_md(truncate post.text, length: 200, separator: ' ')
               a.btn.btn-primary href=post_path(post) Прочитать

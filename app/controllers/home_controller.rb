@@ -2,7 +2,7 @@
 class HomeController < ApplicationController
   include HomeHelper
   def index
-    @posts = Post.last(3)
+    @posts = Post.order(id: :DESC).first(3)
   end
 
   def about

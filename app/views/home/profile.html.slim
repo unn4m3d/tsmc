@@ -59,13 +59,16 @@
                 li.list-group-item.bg-dark.text-center
                   == link_to "Изменить данные", edit_user_registration_path, class: 'btn btn-secondary'
     
-              - unless @user.prefix.empty?
+              - unless @user.prefix.nil? || @user.prefix.empty?
                 li.list-group-item.bg-dark.text-center
                   | Префикс :&nbsp;
                   span.badge.badge-primary
                     | [
                     = @user.prefix
                     | ]
+              - if can? :destroy, @user
+                li.list-group-item.bg-dark.text-center
+                  == link_to "Удалить профиль", registration_path(@user),  data: { confirm: t('devise.registrations.edit.are_you_sure') }, method: :delete, class: 'btn btn-danger' 
     .col-8.text-center
         .card.bg-dark
           img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /

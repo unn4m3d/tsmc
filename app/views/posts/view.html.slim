@@ -9,8 +9,11 @@
         
       hr /
       h6.text-muted
-        a href=home_profile_path(id: @post.user.id)
-          = @post.user.username
+        - if @post.user.nil?
+          | [DELETED]
+        - else
+          a href=home_profile_path(id: @post.user.id)
+            = @post.user.username
         
         | &nbsp;|&nbsp;
         - if @post.created_at == @post.updated_at

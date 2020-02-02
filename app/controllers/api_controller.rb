@@ -76,7 +76,7 @@ class ApiController < ApplicationController
     else
       user = sessions.first.user
       @uuid = sessions.first.uuid
-      @textures = gen_texdata(@uuid, user.username, user)
+      @textures = gen_texdata(@uuid, user.username, user, request.host)
     end
   end
   # rubocop:enable PredicateName
@@ -223,7 +223,7 @@ end
       return
     end
     @username = sessions.first.user.username
-    @textures = gen_texdata @uuid, @username, sessions.first.user
+    @textures = gen_texdata @uuid, @username, sessions.first.user, request.host
   end
 
   def player

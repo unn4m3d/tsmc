@@ -82,7 +82,7 @@ module ApiHelper
       .join(Settings.skins.default).to_s
   end
 
-  def gen_texdata(uuid, username, user)
+  def gen_texdata(uuid, username, user, host)
     tex = {
       timestamp: Time.now.to_i,
       profileId: @uuid,
@@ -90,12 +90,12 @@ module ApiHelper
       isPublic: true,
       textures: {
         SKIN: {
-          url: user.skin.nil? ? default_skin_url : user.skin.url
+          url: "https://#{host}/#{(user.skin.nil? ? default_skin_url : user.skin.url)}"
         }
       }
     }
 
-    tex[:textures][:CAPE] = { url: user.cape_url.to_s } unless user.cape.nil?
+    tex[:textures][:CAPE] = { url: "https://#{host}/#{user.cape_url.to_s}" } unless user.cape.nil?
 
     tex
   end

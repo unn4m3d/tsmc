@@ -46,7 +46,7 @@ class HomeController < ApplicationController
 
   def update_skin
     user = User.find(params[:id])
-    authorize! :manage, user
+    authorize! :edit, user
     user.skin = params[:skin][:skin]
     user.save!
     redirect_to home_profile_path
@@ -54,7 +54,7 @@ class HomeController < ApplicationController
 
   def update_avatar
     user = User.find(params[:id])
-    authorize! :manage, user
+    authorize! :edit, user
     user.avatar = params[:avatar][:avatar]
     user.save!
     redirect_to home_profile_path
@@ -95,7 +95,7 @@ class HomeController < ApplicationController
 
   def update_cape
     user = User.find(params[:id])
-    authorize! :manage, user
+    authorize! :edit, user
     user.cape = params[:cape][:cape]
     user.save!
     redirect_to home_profile_path

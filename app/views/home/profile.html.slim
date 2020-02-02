@@ -49,7 +49,7 @@
                     == f.submit "+", class: 'btn btn-primary'
                       
             ul.list-group.bg-dark
-              - if can? :manage, @user
+              - if can? :edit, @user
                 li.list-group-item.bg-dark.text-center
                   #avatar-form
                     == form_for :avatar, url: update_avatar_path, html: { multipart: true} do |f|
@@ -74,7 +74,7 @@
           img.card-img-top#skin-pretty src=@pretty_skin_url alt="No skin" /
           .card-body
             h4.card-title Скин
-            - if can? :manage, @user
+            - if can? :edit, @user
               p.card-text
                 | Скин в формате PNG размером 64x32 или 64х64
                 #skin-form
@@ -86,7 +86,7 @@
           img.card-img-top#cape-pretty src=@pretty_cape_url alt="No cape" /
           .card-block
             h4.card-title Плащ
-            - if can? :manage, @user
+            - if can? :edit, @user
               p.card-text
                 | Плащ в формате PNG размером 64x32 или 22x17
                 #cape-form

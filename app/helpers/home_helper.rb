@@ -60,7 +60,7 @@ module HomeHelper
       "primary"
     when "moderator"
       "warning"
-    when "helper"
+    when "helper", "builder"
       "success"
     when "banned"
       "danger"

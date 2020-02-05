@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  permission: MyText
+  world: MyString
+  value: MyText
+
+two:
+  name: MyString
+  type: 
+  permission: MyText
+  world: MyString
+  value: MyText

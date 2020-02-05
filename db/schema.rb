@@ -10,7 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200201051339) do
+ActiveRecord::Schema.define(version: 20200205090710) do
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.integer "type", default: 0, null: false
+    t.text "permission", null: false
+    t.string "world", limit: 50, null: false
+    t.text "value", null: false
+    t.index ["name", "type", "world", "permission"], name: "permissions_Index01"
+    t.index ["name", "type", "world"], name: "permissions_Index02"
+  end
+
+  create_table "permissions_entity", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.integer "type", default: 0, null: false
+    t.integer "default", default: 0, null: false
+    t.index ["name", "type"], name: "permissions_entity_Index01", unique: true
+  end
+
+  create_table "permissions_inheritance", force: :cascade do |t|
+    t.string "child", limit: 50, null: false
+    t.string "parent", limit: 50, null: false
+    t.integer "type", null: false
+    t.string "world", limit: 50
+    t.index ["child", "type", "world"], name: "permissions_inheritance_Index01"
+    t.index ["parent", "type"], name: "permissions_inheritance_Index02"
+  end
+
+  create_table "pex_entities", force: :cascade do |t|
+    t.string "name", limit: 50
+    t.integer "type", limit: 1
+    t.integer "default"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pex_inheritances", force: :cascade do |t|
+    t.string "child", limit: 50
+    t.string "parent", limit: 50
+    t.integer "type", limit: 1
+    t.string "world", limit: 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pex_permissions", force: :cascade do |t|
+    t.string "name", limit: 50
+    t.integer "type", limit: 1
+    t.text "permission"
+    t.string "world", limit: 50
+    t.text "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"

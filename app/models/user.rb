@@ -79,7 +79,11 @@ class User < ApplicationRecord
   has_many :posts
 
   def roles
-    @roles ||= role.to_s.split(';')
+    if username.nil?
+      @roles ||= []
+    else
+      @roles ||= PexInheritance.where(child: UuidHelper.username_to_uuid(username)).pluck(:parent)
+    end
   end
 
   def is?(role)

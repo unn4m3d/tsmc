@@ -104,20 +104,18 @@ class HomeController < ApplicationController
   def add_role
     authorize! :assign, :roles
     u = User.find(params[:user][:id])
-    roles = u.roles
-    roles << params[:user][:role]
-    u.role = roles.join(';')
-    u.save!
+    PexInheritance.create!(
+      child: UuidHelper.username_to_uuid(u.username),
+      world: nil,
+      parent: params[:user][:role]
+    )
     redirect_to home_profile_path
   end
 
   def delete_role
     authorize! :assign, :roles
     u = User.find(params[:user][:id])
-    roles = u.roles
-    roles.delete(params[:user][:role])
-    u.role = roles.join(';')
-    u.save!
+    PexInheritance.where(child: UuidHelper.username_to_uuid(username), parent: params[:user][:role]).delete
     redirect_to home_profile_path
   end
 end

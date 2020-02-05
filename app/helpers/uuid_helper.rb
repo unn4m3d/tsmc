@@ -32,4 +32,8 @@ module UuidHelper
       (t_lo.to_i & 0xFFFFFFFF), (t_mi.to_i & 0xFFFF), (t_hi.to_i & 0xFFFF), (cs_hi.to_i & 0xFF), (cs_lo.to_i & 0xFF), *(raw_d[5..-1])
     )
   end
+
+  module_function :username_to_uuid
+  module_function :change_order
+  module_function :raw_md5
 end

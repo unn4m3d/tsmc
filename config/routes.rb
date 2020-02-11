@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  #get 'servers/index'
+
+  get 'servers/show/:id', to: 'servers#show'
+  get 'servers/export'
+
   get 'help/index'
 
   get 'help/commandbook'

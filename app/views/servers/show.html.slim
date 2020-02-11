@@ -1,0 +1,28 @@
+.container.bg-dark
+    .row
+        .col-6.bg-dark
+            .card.bg-dark
+                .card-body
+                    h4.card-title
+                        = @server.name
+                    p.card-text.bg-dark
+                        ul.list-group.bg-dark
+                            li.list-group-item.bg-dark
+                                | Версия:&nbsp;
+                                = @server.version
+                            li.list-group-item.bg-dark
+                                | Адрес:&nbsp;
+                                = "#{@server.ip}:#{@server.port}"
+                            - unless @server.mods.empty?
+                                li.list-group-item.bg-dark
+                                    | Моды:
+                                    ul.list-group.bg-dark
+                                        - for mod in @server.mods.order(:title)
+                                            li.list-group-item.bg-dark
+                                                - if mod.wiki.nil? || mod.wiki.empty?
+                                                    = mod.title
+                                                - else
+                                                    a href=mod.wiki
+                                                        = mod.title
+        .col-6
+            = @server.description

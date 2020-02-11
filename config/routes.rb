@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   #get 'servers/index'
 
-  get 'servers/show/:id', to: 'servers#show'
+  get 'servers/show/:id', to: 'servers#show', as: 'servers_show'
   get 'servers/export'
 
   get 'help/index'

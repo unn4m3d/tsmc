@@ -24,7 +24,7 @@ api_ver_badge = (version) ->
 api_create_progress = (elem,sdata) ->
   console.log("Writing info")
   id = "server-#{sdata.name}"
-  elem.append $("<div class='text-xs-center' id='#{id}'></div>").html("#{sdata.name} #{api_ver_badge(sdata.version)} #{api_badge(sdata)}")
+  elem.append $("<div class='text-xs-center' id='#{id}'></div>").html("<a href=\"#{sdata.link}\">#{sdata.name}</a> #{api_ver_badge(sdata.version)} #{api_badge(sdata)}")
   if sdata.online
     elem.append $("<progress class='progress' value='#{sdata.players.replace(/[^0-9]/g,'')}' max='#{sdata.max.replace(/[^0-9]/g,'')}' aria-describedby='#{id}' />")
   else

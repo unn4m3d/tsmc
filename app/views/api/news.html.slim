@@ -10,7 +10,7 @@ html
       - for post in @posts
         .post
           h2 
-            == post.title
+            = post.title
           
           p 
-            == post.text
+            == render_md post.text

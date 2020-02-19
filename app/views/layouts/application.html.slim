@@ -7,9 +7,16 @@ html
     == javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body.bg-dark.text-light
     == render template: 'layouts/menu'
-    .notice.text-xs-center
+    - flash.each do |type, msg|
+      - if type == :alert
+        .alert.alert-danger role="alert"
+          = msg
+      - else
+        .alert.alert-info role="alert"
+          = msg
+    /.notice.text-xs-center
       = notice
-    .alert.text-xs-center
+    /.alert.text-xs-center
       = alert
 
     == yield

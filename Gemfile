@@ -65,5 +65,5 @@ gem 'whenever', require: false
 gem 'chart-js-rails', '~> 0.1.7'
 gem 'mysql2','~> 0.5.3'
 gem 'hirb', '~> 0.7.3'
-gem 'redcarpet', '~> 3.5.0'
+gem 'redcarpet', '~> 3.5.1'
 gem 'momentjs-rails', '~> 2.20.0'
